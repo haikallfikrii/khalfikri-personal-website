@@ -1,274 +1,531 @@
-// ============================================================
-// Fikri Haikal Portfolio - Interactive JavaScript
-// ============================================================
+/* ==========================================================================
+   UI behaviour: locale switching, theme, navigation, credential modal,
+   glass elasticity, and the contact form.
+   ========================================================================== */
 
-(function() {
-  'use strict';
+(function () {
+  "use strict";
 
-  // ============ THEME TOGGLE ============
-  const themeBtn = document.getElementById('themeBtn');
-  const sunIcon = document.getElementById('sunIcon');
-  const moonIcon = document.getElementById('moonIcon');
+  var STRINGS = window.FH_I18N || {};
+  var DATA = window.FH_DATA || { certs: [], locales: {} };
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  function getTheme() {
-    const saved = localStorage.getItem('fh-theme');
-    if (saved) return saved;
-    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-  }
+  var $ = function (sel, scope) {
+    return (scope || document).querySelector(sel);
+  };
+  var $$ = function (sel, scope) {
+    return Array.prototype.slice.call((scope || document).querySelectorAll(sel));
+  };
 
-  function setTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('fh-theme', theme);
-    if (sunIcon && moonIcon) {
-      sunIcon.style.display = theme === 'dark' ? 'block' : 'none';
-      moonIcon.style.display = theme === 'light' ? 'block' : 'none';
-    }
-  }
-
-  setTheme(getTheme());
-
-  themeBtn?.addEventListener('click', () => {
-    const current = document.documentElement.getAttribute('data-theme');
-    setTheme(current === 'dark' ? 'light' : 'dark');
-  });
-
-  // ============ LANGUAGE DROPDOWN ============
-  const langBtn = document.getElementById('langBtn');
-  const langMenu = document.getElementById('langMenu');
-  const langLabel = document.getElementById('langLabel');
-
-  langBtn?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    langMenu?.classList.toggle('open');
-  });
-
-  document.addEventListener('click', () => {
-    langMenu?.classList.remove('open');
-  });
-
-  langMenu?.querySelectorAll('button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const lang = btn.dataset.lang;
-      localStorage.setItem('fh-lang', lang);
-      if (langLabel) langLabel.textContent = lang.toUpperCase();
-      
-      // Update active state
-      langMenu.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      
-      // Update body direction for RTL
-      document.body.classList.toggle('rtl', lang === 'ar');
-      document.documentElement.lang = lang;
-      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-      
-      langMenu.classList.remove('open');
-    });
-  });
-
-  // Load saved language
-  const savedLang = localStorage.getItem('fh-lang') || 'en';
-  if (langLabel) langLabel.textContent = savedLang.toUpperCase();
-  langMenu?.querySelectorAll('button').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.lang === savedLang);
-  });
-  document.body.classList.toggle('rtl', savedLang === 'ar');
-  document.documentElement.lang = savedLang;
-  document.documentElement.dir = savedLang === 'ar' ? 'rtl' : 'ltr';
-
-  // ============ MOBILE MENU ============
-  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-
-  mobileMenuBtn?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('open');
-  });
-
-  mobileMenu?.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu.classList.remove('open');
-    });
-  });
-
-  // ============ ACTIVE NAV LINK ============
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-menu a');
-
-  function setActiveNav() {
-    const scrollPos = window.scrollY + 150;
-    
-    sections.forEach(section => {
-      const top = section.offsetTop;
-      const height = section.offsetHeight;
-      const id = section.getAttribute('id');
-      
-      if (scrollPos >= top && scrollPos < top + height) {
-        navLinks.forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('href') === `#${id}`) {
-            link.classList.add('active');
-          }
-        });
-      }
-    });
-  }
-
-  window.addEventListener('scroll', setActiveNav, { passive: true });
-  setActiveNav();
-
-  // ============ SMOOTH SCROLL ============
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', (e) => {
-      const targetId = link.getAttribute('href');
-      if (targetId === '#') return;
-      
-      const target = document.querySelector(targetId);
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  });
-
-  // ============ CONTACT FORM ============
-  const contactForm = document.getElementById('contactForm');
-  const formStatus = document.getElementById('formStatus');
-
-  contactForm?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    if (formStatus) {
-      formStatus.textContent = 'Sending...';
-      formStatus.className = 'form-status';
-    }
-
-    const formData = new FormData(contactForm);
-
+  function store(key, value) {
     try {
-      const response = await fetch('api/contact.php', {
-        method: 'POST',
-        body: formData
-      });
-      
-      const result = await response.json();
-      
-      if (result.ok) {
-        if (formStatus) {
-          formStatus.textContent = 'Message sent! I\'ll reply soon.';
-          formStatus.className = 'form-status success';
-        }
-        contactForm.reset();
-      } else {
-        throw new Error(result.message || 'Failed to send');
-      }
-    } catch (error) {
-      if (formStatus) {
-        formStatus.textContent = 'Something went wrong. Please email me directly.';
-        formStatus.className = 'form-status error';
-      }
+      if (value === undefined) return localStorage.getItem(key);
+      localStorage.setItem(key, value);
+    } catch (e) {
+      /* private browsing */
     }
-  });
+    return value;
+  }
 
-  // ============ INTERSECTION OBSERVER FOR ANIMATIONS ============
-  if ('IntersectionObserver' in window) {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
+  /* ============================================================== locale */
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.animationPlayState = 'running';
-          observer.unobserve(entry.target);
-        }
+  var locale = store("fh-lang") || document.documentElement.lang || "en";
+  if (!STRINGS[locale]) locale = "en";
+
+  /* Resolves "work.jobs.growmodo.bullets.0" against the active dictionary. */
+  function t(path, lang) {
+    var node = STRINGS[lang || locale];
+    var parts = path.split(".");
+    for (var i = 0; i < parts.length && node != null; i++) {
+      node = node[parts[i]];
+    }
+    return node == null ? null : node;
+  }
+
+  function applyLocale(lang, silent) {
+    if (!STRINGS[lang]) return;
+    locale = lang;
+
+    var meta = (DATA.locales && DATA.locales[lang]) || { dir: "ltr", tag: lang };
+    var html = document.documentElement;
+    html.lang = meta.tag || lang;
+    html.dir = meta.dir || "ltr";
+
+    // Every translatable node carries a key, so switching never has to
+    // re-render markup — only the leaf text changes.
+    $$("[data-i18n]").forEach(function (el) {
+      var value = t(el.dataset.i18n, lang);
+      if (typeof value === "string") el.textContent = value;
+    });
+
+    $$("[data-i18n-attr]").forEach(function (el) {
+      el.dataset.i18nAttr.split("|").forEach(function (pair) {
+        var bits = pair.split(":");
+        var value = t(bits[1], lang);
+        if (typeof value === "string") el.setAttribute(bits[0], value);
       });
-    }, observerOptions);
+    });
 
-    document.querySelectorAll('.timeline-item, .project-card, .skill-category, .cert-card').forEach(el => {
-      el.style.animationPlayState = 'paused';
-      observer.observe(el);
+    var title = t("meta.title", lang);
+    if (title) document.title = title;
+    var desc = $('meta[name="description"]');
+    if (desc && t("meta.desc", lang)) desc.setAttribute("content", t("meta.desc", lang));
+
+    var label = $("#langLabel");
+    if (label) label.textContent = (meta.tag || lang).toUpperCase();
+    $$(".lang__opt").forEach(function (opt) {
+      opt.classList.toggle("is-active", opt.dataset.lang === lang);
+      opt.setAttribute("aria-selected", opt.dataset.lang === lang ? "true" : "false");
+    });
+
+    renderCertMeta();
+    startTyping();
+
+    if (!silent) {
+      store("fh-lang", lang);
+      document.cookie = "fh_lang=" + lang + ";path=/;max-age=31536000;samesite=lax";
+    }
+
+    if (window.FH_SCROLL) {
+      window.FH_SCROLL.split();
+      window.FH_SCROLL.refresh();
+    }
+  }
+
+  /* Credential dates are assembled from translated labels plus raw dates. */
+  function certDateLine(cert, lang) {
+    var line = t("certs.issued", lang) + " " + cert.issued;
+    if (cert.expires) {
+      var expiredNow = new Date(cert.expires + " 1") < new Date();
+      line += " · " + t(expiredNow ? "certs.expired" : "certs.expires", lang) + " " + cert.expires;
+    }
+    return line;
+  }
+
+  function renderCertMeta() {
+    $$(".cert").forEach(function (card) {
+      var cert = certBySlug(card.dataset.slug);
+      if (!cert) return;
+      var date = $(".cert__date", card);
+      if (date) date.textContent = certDateLine(cert, locale);
+      var foot = $(".cert__foot span", card);
+      if (foot) foot.textContent = t(cert.verify ? "certs.verify" : "certs.noverify");
     });
   }
 
-  // ============ PHOTO TILT EFFECT ============
-  const heroPhoto = document.querySelector('.hero-photo');
-  
-  if (heroPhoto && window.matchMedia('(pointer: fine)').matches) {
-    heroPhoto.addEventListener('mousemove', (e) => {
-      const rect = heroPhoto.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-      
-      const img = heroPhoto.querySelector('img');
-      if (img) {
-        img.style.transform = `perspective(500px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) scale(1.03)`;
-      }
-    });
+  function certBySlug(slug) {
+    for (var i = 0; i < DATA.certs.length; i++) {
+      if (DATA.certs[i].slug === slug) return DATA.certs[i];
+    }
+    return null;
+  }
 
-    heroPhoto.addEventListener('mouseleave', () => {
-      const img = heroPhoto.querySelector('img');
-      if (img) {
-        img.style.transform = '';
+  /* =============================================================== theme */
+
+  var themeBtn = $("#themeBtn");
+  var stored = store("fh-theme");
+  var initialTheme =
+    stored || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+  document.documentElement.dataset.theme = initialTheme;
+
+  if (themeBtn) {
+    themeBtn.addEventListener("click", function () {
+      var next = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+      document.documentElement.dataset.theme = next;
+      store("fh-theme", next);
+      var meta = $('meta[name="theme-color"]');
+      if (meta) meta.setAttribute("content", next === "light" ? "#f4f6fa" : "#06080d");
+    });
+  }
+
+  /* ========================================================== navigation */
+
+  var lang = $("#lang");
+  var langBtn = $("#langBtn");
+
+  if (langBtn && lang) {
+    langBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var open = lang.classList.toggle("is-open");
+      langBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    document.addEventListener("click", function (e) {
+      if (!lang.contains(e.target)) {
+        lang.classList.remove("is-open");
+        langBtn.setAttribute("aria-expanded", "false");
       }
     });
   }
 
-  // ============ TIMELINE HOVER EFFECT ============
-  document.querySelectorAll('.timeline-item').forEach(item => {
-    item.addEventListener('mouseenter', () => {
-      const dot = item.querySelector('.timeline-dot');
-      if (dot) {
-        dot.style.transform = 'scale(1.5)';
-        dot.style.boxShadow = '0 0 20px var(--accent)';
-      }
-    });
-    
-    item.addEventListener('mouseleave', () => {
-      const dot = item.querySelector('.timeline-dot');
-      if (dot) {
-        dot.style.transform = '';
-        dot.style.boxShadow = '';
-      }
+  $$(".lang__opt").forEach(function (opt) {
+    opt.addEventListener("click", function () {
+      applyLocale(opt.dataset.lang);
+      if (lang) lang.classList.remove("is-open");
     });
   });
 
-  // ============ SKILL TAG RANDOMIZE COLOR ON HOVER ============
-  document.querySelectorAll('.skill-tag').forEach(tag => {
-    tag.addEventListener('mouseenter', () => {
-      const hue = Math.random() * 60 + 20; // 20-80 range for warm colors
-      tag.style.borderColor = `hsl(${hue}, 80%, 50%)`;
-      tag.style.backgroundColor = `hsla(${hue}, 80%, 50%, 0.1)`;
-      tag.style.color = `hsl(${hue}, 80%, 50%)`;
+  var sheet = $("#sheet");
+  var burger = $("#burger");
+
+  function setSheet(open) {
+    if (!sheet) return;
+    sheet.classList.toggle("is-open", open);
+    document.body.classList.toggle("is-locked", open);
+    if (burger) burger.setAttribute("aria-expanded", open ? "true" : "false");
+    if (window.FH_SCROLL) window.FH_SCROLL.lock(open);
+
+    // Staggered entry so the sheet feels assembled rather than pasted in.
+    $$(".sheet__link", sheet).forEach(function (link, i) {
+      link.style.transitionDelay = open ? 60 + i * 45 + "ms" : "0ms";
     });
-    
-    tag.addEventListener('mouseleave', () => {
-      tag.style.borderColor = '';
-      tag.style.backgroundColor = '';
-      tag.style.color = '';
+  }
+
+  if (burger) {
+    burger.addEventListener("click", function () {
+      setSheet(!sheet.classList.contains("is-open"));
+    });
+  }
+
+  $$(".sheet__link").forEach(function (link) {
+    link.addEventListener("click", function () {
+      setSheet(false);
     });
   });
 
-  // ============ TYPED EFFECT FOR HERO ============
-  const heroTitle = document.querySelector('.hero-title');
-  if (heroTitle) {
-    const originalText = heroTitle.textContent;
-    const titles = [
-      'Full-Stack Developer & AI Automation Engineer',
-      'Building SaaS Products & Automation Systems',
-      'WordPress • MERN • n8n • Make.com',
-      'Open to Remote Opportunities'
-    ];
-    let titleIndex = 0;
-    
-    setInterval(() => {
-      titleIndex = (titleIndex + 1) % titles.length;
-      heroTitle.style.opacity = '0';
-      setTimeout(() => {
-        heroTitle.textContent = titles[titleIndex];
-        heroTitle.style.opacity = '1';
-      }, 300);
-    }, 4000);
+  // Anchor navigation routed through the motion engine so it inherits inertia.
+  $$('a[href^="#"]').forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      var id = link.getAttribute("href");
+      if (id === "#" || id.length < 2) return;
+      var el = document.querySelector(id);
+      if (!el) return;
+      e.preventDefault();
+      var top = el.getBoundingClientRect().top + window.scrollY - (id === "#top" ? 0 : 84);
+      if (window.FH_SCROLL) window.FH_SCROLL.scrollTo(top);
+      else window.scrollTo(0, top);
+    });
+  });
+
+  /* ==================================================== liquid elasticity */
+
+  /* Mirrors the "elasticity" prop from liquid-glass-react: the panel drifts a
+     couple of pixels toward the cursor while the specular blob tracks it. */
+  function bindElastic(el) {
+    var strength = parseFloat(el.dataset.elastic) || 0.12;
+    var raf = null;
+    var rect = null;
+
+    function move(e) {
+      if (raf) return;
+      raf = requestAnimationFrame(function () {
+        raf = null;
+        rect = el.getBoundingClientRect();
+        var mx = e.clientX - rect.left;
+        var my = e.clientY - rect.top;
+        el.style.setProperty("--lg-mx", mx + "px");
+        el.style.setProperty("--lg-my", my + "px");
+        el.style.setProperty("--lg-tx", ((mx / rect.width - 0.5) * rect.width * strength * 0.14).toFixed(2) + "px");
+        el.style.setProperty("--lg-ty", ((my / rect.height - 0.5) * rect.height * strength * 0.14).toFixed(2) + "px");
+      });
+    }
+
+    function reset() {
+      el.style.setProperty("--lg-tx", "0px");
+      el.style.setProperty("--lg-ty", "0px");
+    }
+
+    el.addEventListener("pointermove", move);
+    el.addEventListener("pointerleave", reset);
+    el.addEventListener("blur", reset);
   }
 
-  console.log('🚀 Portfolio loaded successfully!');
+  if (!reduced && window.matchMedia("(pointer: fine)").matches) {
+    $$(".lg--elastic").forEach(bindElastic);
+  }
+
+  /* Portrait responds to the pointer in 3D rather than shifting flat. */
+  var frame = $("#heroFrame");
+  if (frame && !reduced && window.matchMedia("(pointer: fine)").matches) {
+    frame.addEventListener("pointermove", function (e) {
+      var rect = frame.getBoundingClientRect();
+      var rx = (e.clientY - rect.top) / rect.height - 0.5;
+      var ry = (e.clientX - rect.left) / rect.width - 0.5;
+      frame.style.transform =
+        "perspective(900px) rotateX(" + (-rx * 7).toFixed(2) + "deg) rotateY(" + (ry * 9).toFixed(2) + "deg)";
+    });
+    frame.addEventListener("pointerleave", function () {
+      frame.style.transform = "";
+    });
+  }
+
+  /* ========================================================= experience */
+
+  $$(".job").forEach(function (job, index) {
+    var head = $(".job__top", job);
+    var body = $(".job__body", job);
+    if (!head || !body) return;
+
+    var inner = body.firstElementChild;
+
+    function setOpen(open) {
+      job.classList.toggle("is-open", open);
+      head.setAttribute("aria-expanded", open ? "true" : "false");
+      body.style.height = open ? inner.offsetHeight + "px" : "0px";
+    }
+
+    head.setAttribute("role", "button");
+    head.setAttribute("tabindex", "0");
+    head.setAttribute("aria-controls", body.id);
+    setOpen(index === 0);
+
+    head.addEventListener("click", function () {
+      setOpen(!job.classList.contains("is-open"));
+    });
+    head.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        setOpen(!job.classList.contains("is-open"));
+      }
+    });
+
+    // Locale changes alter bullet length, so open panels need re-measuring.
+    window.addEventListener("resize", function () {
+      if (job.classList.contains("is-open")) body.style.height = inner.offsetHeight + "px";
+    });
+    job._remeasure = function () {
+      if (job.classList.contains("is-open")) body.style.height = inner.offsetHeight + "px";
+    };
+  });
+
+  /* ======================================================== credentials */
+
+  var tabs = $$(".lg-tab");
+  var cards = $$(".cert");
+  var empty = $("#certsEmpty");
+
+  tabs.forEach(function (tab) {
+    tab.addEventListener("click", function () {
+      var group = tab.dataset.group;
+      tabs.forEach(function (other) {
+        other.classList.toggle("is-active", other === tab);
+        other.setAttribute("aria-selected", other === tab ? "true" : "false");
+      });
+
+      var shown = 0;
+      cards.forEach(function (card) {
+        var match = group === "all" || card.dataset.group === group;
+        card.classList.toggle("is-hidden", !match);
+        if (match) shown++;
+      });
+      if (empty) empty.hidden = shown > 0;
+      if (window.FH_SCROLL) window.FH_SCROLL.refresh();
+    });
+  });
+
+  var modal = $("#certModal");
+  var lastFocused = null;
+
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("is-locked");
+    if (window.FH_SCROLL) window.FH_SCROLL.lock(false);
+    if (lastFocused) lastFocused.focus();
+  }
+
+  function openModal(slug) {
+    var cert = certBySlug(slug);
+    if (!cert || !modal) return;
+    lastFocused = document.activeElement;
+
+    $("#cmName").textContent = cert.name;
+    $("#cmIssuer").textContent = cert.issuer;
+    $("#cmArt").innerHTML = cert.art;
+
+    var rows = $("#cmRows");
+    rows.innerHTML = "";
+    function addRow(label, value) {
+      if (!value) return;
+      var row = document.createElement("div");
+      row.className = "cmodal__row";
+      var dt = document.createElement("dt");
+      dt.textContent = label;
+      var dd = document.createElement("dd");
+      dd.textContent = value;
+      row.appendChild(dt);
+      row.appendChild(dd);
+      rows.appendChild(row);
+    }
+    addRow(t("certs.issued"), cert.issued);
+    if (cert.expires) {
+      var expiredNow = new Date(cert.expires + " 1") < new Date();
+      addRow(t(expiredNow ? "certs.expired" : "certs.expires"), cert.expires);
+    }
+    addRow(t("certs.credid"), cert.credential);
+
+    var skillWrap = $("#cmSkills");
+    var chipWrap = $("#cmChips");
+    chipWrap.innerHTML = "";
+    if (cert.skills && cert.skills.length) {
+      cert.skills.forEach(function (skill) {
+        var chip = document.createElement("span");
+        chip.className = "chip";
+        chip.textContent = skill;
+        chipWrap.appendChild(chip);
+      });
+      skillWrap.hidden = false;
+    } else {
+      skillWrap.hidden = true;
+    }
+
+    var verify = $("#cmVerify");
+    if (cert.verify) {
+      verify.href = cert.verify;
+      verify.hidden = false;
+      $("#cmVerifyLabel").textContent = t("certs.verify");
+    } else {
+      verify.hidden = true;
+    }
+
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("is-locked");
+    if (window.FH_SCROLL) window.FH_SCROLL.lock(true);
+    $("#cmClose").focus();
+  }
+
+  cards.forEach(function (card) {
+    card.addEventListener("click", function () {
+      openModal(card.dataset.slug);
+    });
+  });
+
+  if (modal) {
+    $("#cmClose").addEventListener("click", closeModal);
+    $("#cmScrim").addEventListener("click", closeModal);
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+    });
+  }
+
+  /* ============================================================== typing */
+
+  var typedEl = $("#typed");
+  var typeTimer = null;
+
+  function startTyping() {
+    if (!typedEl) return;
+    var roles = t("hero.roles") || [];
+    if (!roles.length) return;
+
+    clearTimeout(typeTimer);
+    if (reduced) {
+      typedEl.textContent = roles[0];
+      return;
+    }
+
+    var index = 0;
+    var chars = 0;
+    var erasing = false;
+    var token = ++startTyping._token;
+
+    (function step() {
+      if (token !== startTyping._token) return;
+      var word = roles[index % roles.length];
+      typedEl.textContent = word.slice(0, chars);
+
+      var wait = erasing ? 34 : 62;
+      if (!erasing && chars === word.length) {
+        erasing = true;
+        wait = 1900;
+      } else if (erasing && chars === 0) {
+        erasing = false;
+        index++;
+        wait = 320;
+      } else {
+        chars += erasing ? -1 : 1;
+      }
+      typeTimer = setTimeout(step, wait);
+    })();
+  }
+  startTyping._token = 0;
+
+  /* ============================================================== clock */
+
+  var clock = $("#clock");
+  if (clock) {
+    (function tickClock() {
+      try {
+        clock.textContent = new Date().toLocaleTimeString(locale === "ar" ? "en-GB" : locale, {
+          timeZone: "Asia/Kuala_Lumpur",
+          hour: "2-digit",
+          minute: "2-digit",
+        }) + " MYT";
+      } catch (e) {
+        clock.textContent = new Date().toLocaleTimeString() + " MYT";
+      }
+      setTimeout(tickClock, 20000);
+    })();
+  }
+
+  /* =============================================================== form */
+
+  var form = $("#contactForm");
+  if (form) {
+    var note = $("#formNote");
+    var submit = $("#formSubmit");
+    var submitLabel = $("#formSubmitLabel");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      note.className = "form__note";
+      submit.disabled = true;
+      submitLabel.textContent = t("contact.sending");
+
+      fetch(form.action, { method: "POST", body: new FormData(form) })
+        .then(function (res) {
+          return res.json();
+        })
+        .then(function (json) {
+          if (!json || !json.ok) throw new Error("rejected");
+          note.textContent = t("contact.ok");
+          note.className = "form__note is-ok";
+          form.reset();
+        })
+        .catch(function () {
+          note.textContent = t("contact.err");
+          note.className = "form__note is-err";
+        })
+        .finally(function () {
+          submit.disabled = false;
+          submitLabel.textContent = t("contact.send");
+        });
+    });
+  }
+
+  /* ================================================================ boot */
+
+  /* Refraction relies on backdrop-filter: url(). WebKit reports support but
+     paints nothing, so limit the enhanced path to engines that render it. */
+  function supportsRefraction() {
+    if (!window.CSS || !CSS.supports) return false;
+    if (!CSS.supports("backdrop-filter", "url(#x)") && !CSS.supports("-webkit-backdrop-filter", "url(#x)")) {
+      return false;
+    }
+    var ua = navigator.userAgent;
+    var isWebKitOnly = /AppleWebKit/.test(ua) && !/Chrome|Chromium|Edg/.test(ua);
+    return !isWebKitOnly && !/Firefox/.test(ua);
+  }
+
+  if (supportsRefraction() && !reduced) {
+    document.documentElement.classList.add("lg-refraction");
+  }
+
+  if (window.FH_SCROLL) window.FH_SCROLL.init();
+
+  applyLocale(locale, true);
+  $$(".job").forEach(function (job) {
+    if (job._remeasure) job._remeasure();
+  });
 })();

@@ -122,6 +122,24 @@ const FH_ISSUER_BRAND = [
   'Habiskerja.com'             => ['#059669', 'HK'],
 ];
 
+/** Local issuer logos mirrored from LinkedIn company pages. */
+const FH_ISSUER_LOGO = [
+  'Anthropic'                  => 'anthropic',
+  'Google Cloud Skills Boost'  => 'gcp',
+  'Google'                     => 'google',
+  'Make'                       => 'make',
+  'Amazon Web Services (AWS)'  => 'aws',
+  'Microsoft'                  => 'microsoft',
+  'Orbit Future Academy'       => 'orbit',
+  'Harisenin.com'              => 'harisenin',
+  'freeCodeCamp'               => 'freecodecamp',
+  'Cambridge English'          => 'cambridge',
+  'Simplilearn'                => 'simplilearn',
+  'Cyber Academy Indonesia'    => 'cyber',
+  'Kelas.com'                  => 'kelas',
+  'Habiskerja.com'             => 'habiskerja',
+];
+
 /**
  * Full credential list mirrored from LinkedIn "Licenses & certifications".
  * group: cloud | ai | web | security | language
@@ -377,13 +395,29 @@ const FH_CERTS = [
 ];
 
 /**
- * Returns a local preview image path when the user has dropped a real scan into
- * assets/certs/, otherwise null so we fall back to generated artwork.
+ * Returns a local preview image path when a real scan lives in assets/certs/,
+ * otherwise null so we fall back to generated artwork.
  */
 function fh_cert_image(string $slug): ?string
 {
   foreach (['jpg', 'jpeg', 'png', 'webp'] as $ext) {
     $rel = "assets/certs/{$slug}.{$ext}";
+    if (is_file(__DIR__ . '/../' . $rel)) {
+      return $rel;
+    }
+  }
+  return null;
+}
+
+/** Issuer logo path (LinkedIn company mark), or null. */
+function fh_issuer_logo(string $issuer): ?string
+{
+  $key = FH_ISSUER_LOGO[$issuer] ?? null;
+  if (!$key) {
+    return null;
+  }
+  foreach (['png', 'jpg', 'jpeg', 'webp'] as $ext) {
+    $rel = "assets/certs/logos/{$key}.{$ext}";
     if (is_file(__DIR__ . '/../' . $rel)) {
       return $rel;
     }

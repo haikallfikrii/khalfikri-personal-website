@@ -45,7 +45,8 @@ $mapUri = 'data:image/svg+xml;charset=utf-8,' . rawurlencode($mapSvg);
 
 /** Certificate payload handed to JS for the modal. */
 $certsJs = array_map(static function (array $c): array {
-  $img = fh_cert_image($c['slug']);
+  $img  = fh_cert_image($c['slug']);
+  $logo = fh_issuer_logo($c['issuer']);
   return [
     'slug'       => $c['slug'],
     'name'       => $c['name'],
@@ -56,12 +57,15 @@ $certsJs = array_map(static function (array $c): array {
     'verify'     => $c['verify'],
     'group'      => $c['group'],
     'skills'     => $c['skills'],
+    'logo'       => $logo,
+    'preview'    => $img,
     'art'        => $img
-      ? '<img src="' . e($img) . '" alt="' . e($c['name']) . '" loading="lazy">'
+      ? '<img src="' . e($img) . '" alt="' . e($c['name']) . '" loading="lazy" decoding="async">'
       : fh_cert_artwork($c),
   ];
 }, FH_CERTS);
 
+$assetV = '20260911b';
 $jsonFlags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
 ?>
 <!DOCTYPE html>
@@ -80,9 +84,9 @@ $jsonFlags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/liquid-glass.css">
-<link rel="stylesheet" href="assets/css/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/liquid-glass.css?v=<?= e($assetV) ?>">
+<link rel="stylesheet" href="assets/css/styles.css?v=<?= e($assetV) ?>">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23ff9f45'/><text x='16' y='22' font-family='sans-serif' font-size='16' font-weight='700' fill='%2306080d' text-anchor='middle'>F</text></svg>">
 <script>
   // Applied before first paint so the theme never flashes.
@@ -524,6 +528,9 @@ $jsonFlags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
         <span class="lg-hl"></span>
         <span class="cert__art">
           <?= $cert['art'] ?>
+          <?php if (!empty($cert['logo'])): ?>
+          <img class="cert__logo" src="<?= e($cert['logo']) ?>" alt="" width="36" height="36" loading="lazy" decoding="async">
+          <?php endif; ?>
           <span class="cert__zoom"><span><?= fh_icon('zoom', 20) ?></span></span>
         </span>
         <span class="cert__body lg-in">
@@ -531,7 +538,7 @@ $jsonFlags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
           <span class="cert__issuer"><?= e($cert['issuer']) ?></span>
           <span class="cert__date"></span>
           <span class="cert__foot<?= $cert['verify'] ? ' is-verified' : '' ?>">
-            <?= fh_icon('verified', 14) ?><span></span>
+            <?= fh_icon($cert['verify'] ? 'verified' : 'link', 14) ?><span></span>
           </span>
         </span>
       </button>
@@ -653,6 +660,9 @@ $jsonFlags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
     <div class="lg-in cmodal__grid">
       <div class="cmodal__art" id="cmArt"></div>
       <div class="cmodal__side">
+        <div class="cmodal__brand" id="cmBrand" hidden>
+          <img id="cmLogo" src="" alt="" width="44" height="44">
+        </div>
         <h3 class="cmodal__name" id="cmName"></h3>
         <p class="cmodal__issuer" id="cmIssuer"></p>
         <dl class="cmodal__rows" id="cmRows"></dl>
@@ -677,7 +687,7 @@ $jsonFlags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
     certs: <?= json_encode($certsJs, $jsonFlags) ?>
   };
 </script>
-<script src="assets/js/scroll.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/scroll.js?v=<?= e($assetV) ?>"></script>
+<script src="assets/js/main.js?v=<?= e($assetV) ?>"></script>
 </body>
 </html>

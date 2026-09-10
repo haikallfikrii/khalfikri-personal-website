@@ -55,7 +55,10 @@
     // re-render markup — only the leaf text changes.
     $$("[data-i18n]").forEach(function (el) {
       var value = t(el.dataset.i18n, lang);
-      if (typeof value === "string") el.textContent = value;
+      if (typeof value !== "string") return;
+      el.textContent = value;
+      // Word-split headings must be rebuilt after the text changes.
+      if (el.hasAttribute("data-split")) delete el.dataset.splitDone;
     });
 
     $$("[data-i18n-attr]").forEach(function (el) {
@@ -80,6 +83,10 @@
 
     renderCertMeta();
     startTyping();
+
+    $$(".job").forEach(function (job) {
+      if (job._remeasure) job._remeasure();
+    });
 
     if (!silent) {
       store("fh-lang", lang);
@@ -342,6 +349,19 @@
     $("#cmName").textContent = cert.name;
     $("#cmIssuer").textContent = cert.issuer;
     $("#cmArt").innerHTML = cert.art;
+
+    var brand = $("#cmBrand");
+    var logo = $("#cmLogo");
+    if (brand && logo) {
+      if (cert.logo) {
+        logo.src = cert.logo;
+        logo.alt = cert.issuer + " logo";
+        brand.hidden = false;
+      } else {
+        logo.removeAttribute("src");
+        brand.hidden = true;
+      }
+    }
 
     var rows = $("#cmRows");
     rows.innerHTML = "";

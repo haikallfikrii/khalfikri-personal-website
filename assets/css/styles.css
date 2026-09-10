@@ -21,7 +21,7 @@
   --accent-3: #8b7cf6;
   --text: var(--ink);
 
-  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font: "Manrope", "Segoe UI", sans-serif;
   --font-display: "Space Grotesk", var(--font);
 
   --shell: min(1180px, calc(100vw - 3rem));
@@ -1226,6 +1226,19 @@ p {
   scale: 1.06;
 }
 
+.cert__logo {
+  position: absolute;
+  left: 0.7rem;
+  bottom: 0.7rem;
+  z-index: 3;
+  width: 2.1rem;
+  height: 2.1rem;
+  object-fit: cover;
+  border-radius: 0.55rem;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+}
+
 /* Zoom affordance appears on hover so the card is obviously clickable. */
 .cert__zoom {
   position: absolute;
@@ -1279,8 +1292,7 @@ p {
 
 .cert__issuer {
   margin-top: 0.35rem;
-  font-size: 0.83rem
-  ;
+  font-size: 0.83rem;
   font-weight: 500;
   color: var(--accent);
 }
@@ -1378,17 +1390,35 @@ p {
   position: relative;
   min-height: 15rem;
   overflow: hidden;
+  background:
+    radial-gradient(120% 90% at 20% 0%, rgba(255, 255, 255, 0.12), transparent 55%),
+    linear-gradient(160deg, rgba(255, 159, 69, 0.18), rgba(79, 209, 197, 0.1));
 }
 
 .cmodal__art img,
 .cmodal__art .cert-art {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  min-height: 18rem;
+  object-fit: contain;
+  display: block;
 }
 
 .cmodal__side {
   padding: clamp(1.5rem, 3vw, 2.4rem);
+}
+
+.cmodal__brand {
+  margin-bottom: 0.85rem;
+}
+
+.cmodal__brand img {
+  width: 2.75rem;
+  height: 2.75rem;
+  object-fit: cover;
+  border-radius: 0.7rem;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(255, 255, 255, 0.35);
 }
 
 .cmodal__name {

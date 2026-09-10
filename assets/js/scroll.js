@@ -1,7 +1,7 @@
 /* ==========================================================================
    Motion engine
-   Inertial wheel scrolling, parallax, pinned horizontal rails, progress, and
-   reveal observers.
+   Inertial wheel scrolling, parallax, pinned horizontal rails, direction-aware
+   navbar sizing, and reveal observers.
 
    The inertia animates the real document scroll position rather than
    translating a wrapper, so position: sticky, IntersectionObserver, anchor
@@ -26,9 +26,11 @@ window.FH_SCROLL = (function () {
 
   var pins = [];
   var parallax = [];
-  var navEl, navPin, progressEl, workRail, workYear;
+  var navEl, navPin, workRail, workYear;
   var navLinks = [];
   var sections = [];
+  var lastScrollY = 0;
+  var navCompact = false;
 
   function clamp(v, lo, hi) {
     return v < lo ? lo : v > hi ? hi : v;
@@ -100,12 +102,18 @@ window.FH_SCROLL = (function () {
   /* --------------------------------------------------------------- render */
 
   function render(y) {
-    if (progressEl) {
-      var max = maxScroll();
-      progressEl.style.transform = "scaleX(" + (max > 0 ? y / max : 0) + ")";
+    // Shrink while scrolling down; expand again as soon as the user scrolls up
+    // (no need to return all the way to the top).
+    var delta = y - lastScrollY;
+    if (y <= 48) {
+      navCompact = false;
+    } else if (delta > 4) {
+      navCompact = true;
+    } else if (delta < -4) {
+      navCompact = false;
     }
-
-    if (navEl) navEl.classList.toggle("is-compact", y > 60);
+    lastScrollY = y;
+    if (navEl) navEl.classList.toggle("is-compact", navCompact);
 
     parallax.forEach(function (item) {
       var rect = item.el.getBoundingClientRect();
@@ -240,8 +248,9 @@ window.FH_SCROLL = (function () {
   function init() {
     navEl = document.getElementById("nav");
     navPin = document.getElementById("navPin");
-    progressEl = document.getElementById("progress");
     navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav__link"));
+    lastScrollY = window.scrollY;
+    navCompact = lastScrollY > 80;
     sections = navLinks
       .map(function (link) {
         return document.querySelector(link.getAttribute("href"));

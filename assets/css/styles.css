@@ -185,8 +185,7 @@ p {
 
 .atmos__blob:nth-child(3) {
   width: 38vw;
-  height: 38vw
-  ;
+  height: 38vw;
   bottom: -14vw;
   left: 26vw;
   background: radial-gradient(circle, color-mix(in srgb, var(--accent-3) 46%, transparent), transparent 68%);
@@ -212,20 +211,6 @@ p {
   opacity: 0.035;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* ------------------------------------------------------------------ progress */
-
-.progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 120;
-  height: 2px;
-  width: 100%;
-  transform-origin: 0 50%;
-  transform: scaleX(0);
-  background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3));
 }
 
 /* ----------------------------------------------------------------- navbar */
@@ -910,6 +895,7 @@ p {
   display: flex;
   align-items: flex-start;
   gap: 1rem;
+  position: relative;
 }
 
 .job__role {
@@ -1760,15 +1746,52 @@ html.fh-ready .rv--scale.is-in {
 
 /* ------------------------------------------------------------- responsive */
 
+@media (max-width: 1200px) {
+  .nav {
+    width: min(1000px, calc(100vw - 1.75rem));
+  }
+
+  .nav.is-compact {
+    width: min(720px, calc(100vw - 1.75rem));
+  }
+
+  .nav__link {
+    padding-inline: 0.7rem;
+    font-size: 0.88rem;
+  }
+}
+
 @media (max-width: 1080px) {
+  .hero {
+    min-height: auto;
+    padding-block: calc(var(--nav-h) + 2.25rem) 3.25rem;
+  }
+
   .hero__grid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 2.25rem;
+    text-align: center;
+  }
+
+  .hero__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero__lead,
+  .hero__based {
+    max-width: 38rem;
+    margin-inline: auto;
+  }
+
+  .hero__cta {
+    justify-content: center;
   }
 
   .hero__figure {
     order: -1;
-    width: min(18rem, 70%);
+    width: min(17rem, 68%);
   }
 
   .hero__chip {
@@ -1800,11 +1823,27 @@ html.fh-ready .rv--scale.is-in {
     min-height: 11rem;
     max-height: 15rem;
   }
+
+  .cmodal__art img,
+  .cmodal__art .cert-art {
+    min-height: 12rem;
+  }
 }
 
 @media (max-width: 900px) {
   :root {
-    --shell: calc(100vw - 2.25rem);
+    --shell: calc(100vw - 2rem);
+    --sect-y: clamp(4rem, 10vh, 6.5rem);
+  }
+
+  .nav {
+    top: 0.75rem;
+    width: calc(100vw - 1.5rem);
+  }
+
+  .nav.is-compact {
+    top: 0.55rem;
+    width: calc(100vw - 1.5rem);
   }
 
   .nav__links {
@@ -1817,6 +1856,12 @@ html.fh-ready .rv--scale.is-in {
 
   .nav__brand {
     margin-inline-end: auto;
+    padding-inline: 0.35rem;
+    font-size: 0.98rem;
+  }
+
+  .nav.is-compact .nav__brand {
+    font-size: 0.92rem;
   }
 
   .sheet {
@@ -1830,6 +1875,18 @@ html.fh-ready .rv--scale.is-in {
 
   .stats {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .certs__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .skills__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .job__meta {
+    gap: 0.35rem 0.85rem;
   }
 
   /* Pinning fights native touch scrolling, so the rail becomes a swipe strip. */
@@ -1859,7 +1916,7 @@ html.fh-ready .rv--scale.is-in {
 
   .hscroll__track {
     transform: none !important;
-    padding-inline: 1.125rem;
+    padding-inline: 1rem;
   }
 
   .pcard {
@@ -1871,21 +1928,89 @@ html.fh-ready .rv--scale.is-in {
   .hscroll__hint {
     position: static;
     margin-top: 1.25rem;
-    padding-inline: 1.125rem;
+    padding-inline: 1rem;
+  }
+
+  .cmodal {
+    padding: 0.75rem;
+  }
+
+  .cmodal__panel {
+    --lg-r: 22px;
+    max-height: min(92svh, 52rem);
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 640px) {
+  :root {
+    --shell: calc(100vw - 1.5rem);
+  }
+
   .hero {
-    padding-top: calc(var(--nav-h) + 1.5rem);
+    padding-top: calc(var(--nav-h) + 1.35rem);
+    padding-bottom: 2.5rem;
+  }
+
+  .hero__figure {
+    width: min(15.5rem, 78%);
+  }
+
+  .hero__photo {
+    max-height: 15.5rem;
+  }
+
+  .hero__cta {
+    width: 100%;
   }
 
   .hero__cta .lg-btn {
     width: 100%;
+    justify-content: center;
+  }
+
+  .stats {
+    gap: 0.65rem;
+  }
+
+  .stat {
+    padding: 0.9rem 0.75rem;
+  }
+
+  .job {
+    padding: 1.1rem 1rem 1.35rem;
   }
 
   .job__top {
     flex-wrap: wrap;
+  }
+
+  .job__chev {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  [dir="rtl"] .job__chev {
+    right: auto;
+    left: 0;
+  }
+
+  .certs__tabs {
+    gap: 0.35rem;
+    margin-bottom: 1.35rem;
+  }
+
+  .lg-tab {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.8rem;
+  }
+
+  .certs__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cert__art {
+    aspect-ratio: 16 / 9;
   }
 
   .cmodal__row {
@@ -1895,6 +2020,60 @@ html.fh-ready .rv--scale.is-in {
 
   .cmodal__row dd {
     text-align: start;
+  }
+
+  .cmodal__side {
+    padding: 1.2rem;
+  }
+
+  .crow {
+    padding: 0.95rem;
+  }
+
+  .foot__grid {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .socials {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 400px) {
+  .nav__brand span:not(.nav__mark) {
+    max-width: 9.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .hero__figure {
+    width: min(13.5rem, 84%);
+  }
+
+  .stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sect__title {
+    font-size: clamp(1.55rem, 8vw, 2.1rem);
+  }
+}
+
+/* Prevent rare horizontal spill on very small devices. */
+@media (max-width: 900px) {
+  .marquee__track {
+    animation-duration: 28s;
+  }
+
+  .work__list {
+    padding-left: 1.1rem;
+  }
+
+  [dir="rtl"] .work__list {
+    padding-right: 1.1rem;
   }
 }
 

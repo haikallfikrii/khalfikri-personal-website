@@ -1,0 +1,2 @@
+# Block direct HTTP access to contact logs and other stored files.
+Require all denied

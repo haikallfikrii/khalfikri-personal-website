@@ -65,7 +65,7 @@ $certsJs = array_map(static function (array $c): array {
   ];
 }, FH_CERTS);
 
-$assetV = '20260911c';
+$assetV = '20260911d';
 $jsonFlags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
 ?>
 <!DOCTYPE html>
@@ -141,8 +141,6 @@ $jsonFlags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
   <div class="atmos__grid"></div>
   <div class="atmos__grain"></div>
 </div>
-
-<div class="progress" id="progress" aria-hidden="true"></div>
 
 <!-- ============================================================== navbar -->
 <header class="nav" id="nav">

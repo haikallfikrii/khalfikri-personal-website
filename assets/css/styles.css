@@ -24,9 +24,10 @@
   --font: "Manrope", "Segoe UI", sans-serif;
   --font-display: "Space Grotesk", var(--font);
 
-  --shell: min(1180px, calc(100vw - 3rem));
+  --shell: min(1180px, calc(100% - 3rem));
   --nav-h: 4.75rem;
   --sect-y: clamp(5.5rem, 11vh, 9rem);
+  --dock-h: 0px;
 }
 
 [data-theme="light"] {
@@ -44,6 +45,8 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 /* JS-driven inertial scrolling replaces the native easing when available. */
@@ -59,7 +62,8 @@ body {
   font-size: 1rem;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
-  overflow-x: clip;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body.is-locked {
@@ -1764,7 +1768,7 @@ html.fh-ready .rv--scale.is-in {
 @media (max-width: 1080px) {
   .hero {
     min-height: auto;
-    padding-block: calc(var(--nav-h) + 2.25rem) 3.25rem;
+    padding-block: 2rem 3.25rem;
   }
 
   .hero__grid {
@@ -1832,45 +1836,107 @@ html.fh-ready .rv--scale.is-in {
 
 @media (max-width: 900px) {
   :root {
-    --shell: calc(100vw - 2rem);
+    --shell: calc(100% - 2rem);
     --sect-y: clamp(4rem, 10vh, 6.5rem);
+    --nav-h: 4.5rem;
+    --dock-h: 5.25rem;
   }
 
+  /* Bottom dock: controls only — no brand mark/name. */
   .nav {
-    top: 0.75rem;
-    width: calc(100vw - 1.5rem);
+    top: auto;
+    bottom: max(0.7rem, env(safe-area-inset-bottom, 0px));
+    left: 50%;
+    width: auto;
+    max-width: calc(100% - 1.25rem);
+    translate: -50% 0;
+    transition: translate 0.55s var(--spring), bottom 0.45s var(--spring), opacity 0.35s ease;
   }
 
   .nav.is-compact {
-    top: 0.55rem;
-    width: calc(100vw - 1.5rem);
+    top: auto;
+    bottom: max(0.7rem, env(safe-area-inset-bottom, 0px));
+    width: auto;
+    translate: -50% calc(100% + 1.35rem);
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  body.is-locked .nav,
+  body.is-locked .nav.is-compact {
+    translate: -50% 0;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav__bar {
+    --lg-r: 999px;
+    padding: 0.42rem 0.5rem;
+    width: auto;
+  }
+
+  .nav.is-compact .nav__bar {
+    padding: 0.42rem 0.5rem;
+  }
+
+  .nav__row {
+    justify-content: center;
+    gap: 0.35rem;
+    width: auto;
+  }
+
+  .nav__brand {
+    display: none;
   }
 
   .nav__links {
     display: none;
   }
 
+  .nav__actions {
+    margin: 0;
+    gap: 0.35rem;
+  }
+
   .nav__burger {
     display: inline-flex;
   }
 
-  .nav__brand {
-    margin-inline-end: auto;
-    padding-inline: 0.35rem;
-    font-size: 0.98rem;
+  .lang__menu {
+    top: auto;
+    bottom: calc(100% + 0.55rem);
+    right: 0;
+    transform: translateY(8px) scale(0.96);
+    transform-origin: bottom right;
   }
 
-  .nav.is-compact .nav__brand {
-    font-size: 0.92rem;
+  .lang.is-open .lang__menu {
+    transform: none;
   }
 
   .sheet {
-    display: block;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem 1rem calc(var(--dock-h) + 0.35rem);
   }
 
   .sheet:not(.is-open) {
     pointer-events: none;
     visibility: hidden;
+  }
+
+  .sheet__panel {
+    width: 100%;
+  }
+
+  .hero {
+    padding-top: 1.35rem;
+    padding-bottom: calc(var(--dock-h) + 1.5rem);
+  }
+
+  #contact,
+  .foot {
+    padding-bottom: calc(var(--dock-h) + 1.25rem);
   }
 
   .stats {
@@ -1943,12 +2009,20 @@ html.fh-ready .rv--scale.is-in {
 
 @media (max-width: 640px) {
   :root {
-    --shell: calc(100vw - 1.5rem);
+    --shell: calc(100% - 1.25rem);
   }
 
   .hero {
-    padding-top: calc(var(--nav-h) + 1.35rem);
-    padding-bottom: 2.5rem;
+    padding-top: 1.1rem;
+    padding-bottom: calc(var(--dock-h) + 1.25rem);
+  }
+
+  .hero__name {
+    font-size: clamp(1.85rem, 11vw, 2.55rem);
+  }
+
+  .hero__lead {
+    font-size: 0.95rem;
   }
 
   .hero__figure {
@@ -2042,11 +2116,12 @@ html.fh-ready .rv--scale.is-in {
 }
 
 @media (max-width: 400px) {
-  .nav__brand span:not(.nav__mark) {
-    max-width: 9.5rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  .nav {
+    max-width: calc(100% - 1rem);
+  }
+
+  .nav__bar {
+    padding: 0.38rem 0.42rem;
   }
 
   .hero__figure {

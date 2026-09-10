@@ -65,7 +65,7 @@ $certsJs = array_map(static function (array $c): array {
   ];
 }, FH_CERTS);
 
-$assetV = '20260911e';
+$assetV = '20260911f';
 $jsonFlags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
 ?>
 <!DOCTYPE html>

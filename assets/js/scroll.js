@@ -203,11 +203,12 @@ window.FH_SCROLL = (function () {
     });
   }
 
-  /* Splits headings into per-word spans so they can rise in sequence. */
+  /* Splits headings into per-word spans so they can rise in sequence.
+     Safe to call again after a locale change — existing spans are rebuilt. */
   function splitWords() {
     document.querySelectorAll("[data-split]").forEach(function (el) {
       if (el.dataset.splitDone) return;
-      var words = el.textContent.trim().split(/\s+/);
+      var words = el.textContent.trim().split(/\s+/).filter(Boolean);
       el.textContent = "";
       words.forEach(function (word, i) {
         var outer = document.createElement("span");

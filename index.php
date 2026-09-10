@@ -1,520 +1,683 @@
 <?php
 declare(strict_types=1);
-$pageTitle = 'Muhamad Fikri Haikal — Full-Stack & AI Automation Engineer';
-$pageDesc = 'Full-Stack Developer and AI Automation Engineer based in Kuala Perlis, Malaysia. WordPress, MERN, n8n, Make.com, RAG pipelines. Founder of TableTap and ChatLM.';
-$photo = 'assets/img/photo.png';
-$email = 'muhamadfikrih29@gmail.com';
-$phone = '+60 11-2535-2270';
-$phoneHref = '+601125352270';
-$linkedin = 'https://www.linkedin.com/in/muhamad-fikri-haikal-fullstack-web-developer/';
-$github = 'https://github.com/haikallfikrii';
-$tabletap = 'https://tabletap.my';
-$chatlm = 'https://chatlm.tech';
 
-// All skills for marquee
-$skills = ['JavaScript', 'TypeScript', 'PHP 8', 'Python', 'React', 'Next.js', 'Node.js', 'Laravel', 'WordPress', 'Shopify', 'Webflow', 'n8n', 'Make.com', 'Zapier', 'AWS', 'GCP', 'Azure', 'MySQL', 'MongoDB', 'PostgreSQL', 'Stripe', 'OpenAI', 'Claude', 'LangChain', 'Supabase', 'Tailwind CSS', 'GraphQL', 'REST API'];
+require __DIR__ . '/includes/icons.php';
+require __DIR__ . '/includes/data.php';
+require __DIR__ . '/includes/i18n.php';
 
-// All certifications from LinkedIn
-$certs = [
-  ['name' => 'Claude Code 101', 'issuer' => 'Anthropic', 'date' => 'Aug 2026', 'id' => 'dqjtmu5gbzwn'],
-  ['name' => 'MLOps for Generative AI', 'issuer' => 'Google Cloud Skills Boost', 'date' => 'Oct 2025', 'id' => '18854828'],
-  ['name' => 'Make Advanced', 'issuer' => 'Make.com', 'date' => 'Sep 2025', 'id' => ''],
-  ['name' => 'Make Intermediate', 'issuer' => 'Make.com', 'date' => 'Sep 2025', 'id' => ''],
-  ['name' => 'Make Foundation', 'issuer' => 'Make.com', 'date' => 'Sep 2025', 'id' => ''],
-  ['name' => 'Skills Boost Arcade Trivia Week 2', 'issuer' => 'Google', 'date' => 'Sep 2025', 'id' => '18076790'],
-  ['name' => 'Skills Boost Arcade Trivia Week 1', 'issuer' => 'Google', 'date' => 'Sep 2025', 'id' => '18073756'],
-  ['name' => 'AWS re/Start Graduate', 'issuer' => 'Amazon Web Services', 'date' => 'Nov 2024', 'id' => ''],
-  ['name' => 'Develop solutions with Azure AI Document Intelligence', 'issuer' => 'Microsoft', 'date' => 'Feb 2025', 'id' => ''],
-  ['name' => 'Develop AI agents using Azure OpenAI and Semantic Kernel SDK', 'issuer' => 'Microsoft', 'date' => 'Feb 2025', 'id' => ''],
-  ['name' => 'Get started with Azure AI Services', 'issuer' => 'Microsoft', 'date' => 'Feb 2025', 'id' => ''],
-  ['name' => 'Microsoft Azure Cloud Concepts', 'issuer' => 'Microsoft', 'date' => 'Feb 2025', 'id' => ''],
-  ['name' => 'Microsoft Azure AI Fundamentals', 'issuer' => 'Microsoft', 'date' => 'Feb 2025', 'id' => ''],
-  ['name' => 'AWS Cloud Practitioner', 'issuer' => 'Orbit Future Academy', 'date' => 'Sep 2024', 'id' => 'OFA/2024-09/AWS/AWSREST/16340'],
-  ['name' => 'Fullstack Web Development', 'issuer' => 'Harisenin.com', 'date' => 'Jul 2024', 'id' => 'HSBC/FSD/01/20240728052'],
-  ['name' => 'Responsive Web Design', 'issuer' => 'freeCodeCamp', 'date' => 'Mar 2024', 'id' => ''],
-  ['name' => 'PHP Programming', 'issuer' => 'Simplilearn', 'date' => 'Jun 2024', 'id' => '6755604'],
-  ['name' => 'Cambridge English Advanced (CAE)', 'issuer' => 'Cambridge English', 'date' => 'Jan 2024', 'id' => 'MY959_MSTFIKRI_HAIKAL'],
-  ['name' => 'Introduction to Information Security', 'issuer' => 'Cyber Academy Indonesia', 'date' => 'Jan 2024', 'id' => 'PKMI01101240118'],
-  ['name' => 'Microsoft Security, Compliance, and Identity Fundamentals', 'issuer' => 'Microsoft', 'date' => 'Jan 2024', 'id' => '70882_77'],
-  ['name' => 'UI/UX Design by Figma', 'issuer' => 'Kelas.com', 'date' => 'Sep 2023', 'id' => 'CERT-2FCF372C'],
-  ['name' => 'Back-End Development with JavaScript and Node.js', 'issuer' => 'Kelas.com', 'date' => 'Sep 2023', 'id' => 'CERT-196AF385'],
-  ['name' => 'WordPress Developer Certificate', 'issuer' => 'Habiskerja.com', 'date' => 'Feb 2024', 'id' => '010024/HK/22'],
-];
+$loc = fh_locale();
+$s   = FH_STRINGS[$loc];
+$dir = FH_LOCALES[$loc]['dir'];
+$p   = FH_PROFILE;
 
-// Experience timeline
-$jobs = [
-  [
-    'role' => 'Senior Full-Stack Developer / AI Expert',
-    'company' => 'Growmodo GmbH',
-    'location' => 'Leverkusen, Germany (Remote)',
-    'period' => 'Nov 2025 – Present',
-    'type' => 'Full-Time',
-    'bullets' => [
-      'Build high-performance client sites on WordPress, Shopify, Webflow with custom plugins and themes',
-      'Ship REST, GraphQL, third-party integrations focused on scale, security, and performance',
-      'Use AI to accelerate development, QA, and documentation across distributed teams',
-    ],
-    'stack' => ['Next.js', 'PHP', 'WordPress', 'Shopify', 'Webflow', 'n8n', 'AWS'],
-  ],
-  [
-    'role' => 'Full-Stack · AI Automation · API Specialist',
-    'company' => 'Gedex Network Inc.',
-    'location' => 'Carson City, USA (Remote)',
-    'period' => 'Jan 2025 – Present',
-    'type' => 'Part-Time',
-    'bullets' => [
-      'Own custom WordPress plugins, REST APIs, and Elementor UI for CaasEdu products',
-      'Design end-to-end n8n / Make / LLM pipelines for AI content and multi-platform publishing',
-      'Build Google Apps Script flows that process Sheets into automated publishing CSVs',
-    ],
-    'stack' => ['PHP', 'WordPress', 'MySQL', 'n8n', 'Make.com', 'OpenAI'],
-  ],
-  [
-    'role' => 'Agentic AI & Automation Specialist',
-    'company' => 'AIgents Solutions',
-    'location' => 'Malaysia (Remote)',
-    'period' => 'Apr 2025 – Present',
-    'type' => 'Part-Time',
-    'bullets' => [
-      'Deploy agentic workflows connecting AI APIs, webhooks, and no-code tools',
-      'Maintain WordPress/Elementor sites on AWS EC2 and automate manual processes',
-    ],
-    'stack' => ['n8n', 'Zapier', 'Make.com', 'OpenAI', 'Supabase', 'AWS'],
-  ],
-  [
-    'role' => 'Full-Stack Web Engineer',
-    'company' => 'JomSite Digital Services',
-    'location' => 'Perlis, Malaysia',
-    'period' => 'Feb 2024 – Present',
-    'type' => 'Part-Time',
-    'bullets' => [
-      'Ship React/Tailwind frontends with PHP and Node backends including payment APIs and LMS',
-      'Own DevOps on AWS (EC2, RDS, S3, IAM, VPC) with monitoring and incident response',
-    ],
-    'stack' => ['React', 'Node.js', 'PHP', 'WordPress', 'MongoDB', 'AWS'],
-  ],
-  [
-    'role' => 'Full-Stack Web Developer',
-    'company' => 'Upwork',
-    'location' => 'Remote (Freelance)',
-    'period' => 'Sep 2024 – Present',
-    'type' => 'Freelance',
-    'bullets' => [
-      'Run full project cycles for international clients: scope, estimate, build, deploy, handoff docs',
-    ],
-    'stack' => ['Full-Stack', 'Automation', 'Client Delivery'],
-  ],
-];
+/** Shorthand for echoing a translated leaf as escaped text. */
+function e(?string $v): string
+{
+  return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8');
+}
 
-// Projects
-$projects = [
-  ['name' => 'TableTap SaaS', 'desc' => 'Multi-tenant QR ordering platform with role-based dashboards (owner, cashier, waiter, kitchen), split bills, thermal receipts, 15+ SQL migrations, bilingual UI.', 'link' => $tabletap, 'icon' => '🍽️'],
-  ['name' => 'ChatLM Widget', 'desc' => 'Embeddable AI chat widget in Shadow DOM. BYOK or Managed AI via OpenRouter, Stripe billing, quota metering, CORS and API key hardening.', 'link' => $chatlm, 'icon' => '💬'],
-  ['name' => 'Agentic Content Publishing', 'desc' => 'n8n + DeepSeek pipeline publishing SEO posts to WordPress via REST API — unattended on VPS with retries and conditionals. ~80% faster publishing.', 'link' => null, 'icon' => '🤖'],
-  ['name' => 'CAAST Education LMS', 'desc' => 'WordPress + Tutor LMS with custom PHP plugins, student notes REST API, content developer dashboard, AI publishing wired through n8n.', 'link' => null, 'icon' => '📚'],
-  ['name' => 'AI Clinic Appointment Chatbot', 'desc' => 'WhatsApp booking bot with WAHA, GPT-4o, Google Calendar/Sheets integration, Telegram live-agent alerts, PDPA-aligned documentation.', 'link' => null, 'icon' => '🏥'],
-  ['name' => 'Company Dashboard', 'desc' => 'Business site with role-based dashboard using custom post types and ACF, PDF generation, WhatsApp API notifications, AWS deployment with CDN.', 'link' => null, 'icon' => '📊'],
-];
+/**
+ * Displacement map for the refraction filter.
+ * Red encodes horizontal offset, green vertical. The blurred neutral-grey
+ * rounded rect on top flattens the interior, so only the rim bends light —
+ * which is what makes the edge of the panel behave like a real lens.
+ */
+$mapSvg = <<<'SVG'
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400">
+  <defs>
+    <linearGradient id="x" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#000"/><stop offset="1" stop-color="#f00"/>
+    </linearGradient>
+    <linearGradient id="y" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000"/><stop offset="1" stop-color="#0f0"/>
+    </linearGradient>
+    <filter id="soft" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="26"/>
+    </filter>
+  </defs>
+  <rect width="400" height="400" fill="#808080"/>
+  <rect width="400" height="400" fill="url(#x)" style="mix-blend-mode:screen"/>
+  <rect width="400" height="400" fill="url(#y)" style="mix-blend-mode:screen"/>
+  <rect x="26" y="26" width="348" height="348" rx="88" fill="#808080" filter="url(#soft)"/>
+</svg>
+SVG;
+$mapUri = 'data:image/svg+xml;charset=utf-8,' . rawurlencode($mapSvg);
 
-// Skill groups
-$skillGroups = [
-  ['name' => 'Languages & Frontend', 'icon' => '💻', 'items' => ['JavaScript', 'TypeScript', 'PHP 8', 'Python', 'HTML5', 'CSS3', 'React.js', 'Next.js', 'Tailwind CSS', 'Bootstrap']],
-  ['name' => 'Backend & Database', 'icon' => '⚙️', 'items' => ['Node.js', 'Express.js', 'Laravel', 'REST API', 'GraphQL', 'MySQL', 'PostgreSQL', 'MongoDB', 'Redis']],
-  ['name' => 'CMS & E-commerce', 'icon' => '🛒', 'items' => ['WordPress', 'Shopify (Liquid)', 'Webflow', 'WooCommerce', 'ACF', 'Elementor', 'Tutor LMS']],
-  ['name' => 'AI & Automation', 'icon' => '🤖', 'items' => ['n8n', 'Make.com', 'Zapier', 'OpenAI API', 'Claude API', 'LangChain', 'RAG', 'Google Apps Script']],
-  ['name' => 'Cloud & DevOps', 'icon' => '☁️', 'items' => ['AWS (EC2, S3, RDS, Lambda)', 'Google Cloud', 'Microsoft Azure', 'Supabase', 'Docker', 'CI/CD', 'Git']],
-  ['name' => 'Tools & Collaboration', 'icon' => '🔧', 'items' => ['Stripe', 'GoHighLevel', 'HubSpot', 'Figma', 'Notion', 'Slack', 'Jira', 'Loom']],
-];
+/** Certificate payload handed to JS for the modal. */
+$certsJs = array_map(static function (array $c): array {
+  $img = fh_cert_image($c['slug']);
+  return [
+    'slug'       => $c['slug'],
+    'name'       => $c['name'],
+    'issuer'     => $c['issuer'],
+    'issued'     => $c['issued'],
+    'expires'    => $c['expires'] ?? null,
+    'credential' => $c['credential'],
+    'verify'     => $c['verify'],
+    'group'      => $c['group'],
+    'skills'     => $c['skills'],
+    'art'        => $img
+      ? '<img src="' . e($img) . '" alt="' . e($c['name']) . '" loading="lazy">'
+      : fh_cert_artwork($c),
+  ];
+}, FH_CERTS);
+
+$jsonFlags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
 ?>
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="<?= e(FH_LOCALES[$loc]['tag']) ?>" dir="<?= e($dir) ?>" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="<?= htmlspecialchars($pageDesc, ENT_QUOTES) ?>">
-  <meta name="theme-color" content="#0a0f14">
-  <meta property="og:title" content="<?= htmlspecialchars($pageTitle, ENT_QUOTES) ?>">
-  <meta property="og:description" content="<?= htmlspecialchars($pageDesc, ENT_QUOTES) ?>">
-  <meta property="og:image" content="<?= htmlspecialchars($photo, ENT_QUOTES) ?>">
-  <title><?= htmlspecialchars($pageTitle, ENT_QUOTES) ?></title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/styles.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>👨‍💻</text></svg>">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><?= e($s['meta']['title']) ?></title>
+<meta name="description" content="<?= e($s['meta']['desc']) ?>">
+<meta name="author" content="<?= e($p['name']) ?>">
+<meta name="theme-color" content="#06080d">
+<meta property="og:type" content="website">
+<meta property="og:title" content="<?= e($s['meta']['title']) ?>">
+<meta property="og:description" content="<?= e($s['meta']['desc']) ?>">
+<meta property="og:image" content="<?= e($p['photo']) ?>">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/liquid-glass.css">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23ff9f45'/><text x='16' y='22' font-family='sans-serif' font-size='16' font-weight='700' fill='%2306080d' text-anchor='middle'>F</text></svg>">
+<script>
+  // Applied before first paint so the theme never flashes.
+  try {
+    var st = localStorage.getItem('fh-theme');
+    document.documentElement.dataset.theme =
+      st || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  } catch (e) {}
+</script>
 </head>
-<body>
-  <!-- Background -->
-  <div class="bg-wrapper" aria-hidden="true">
-    <div class="bg-gradient"></div>
-    <div class="bg-grid"></div>
-  </div>
+<body id="top">
 
-  <!-- Navigation -->
-  <header class="nav" id="nav">
-    <a class="nav-brand" href="#">Fikri<span>.</span></a>
-    <nav class="nav-menu">
-      <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#certs">Certifications</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <div class="nav-actions">
-      <div class="lang-dropdown">
-        <button class="nav-btn" id="langBtn" aria-label="Change language">
-          <span id="langLabel">EN</span>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-        </button>
-        <div class="lang-menu" id="langMenu">
-          <button data-lang="en" class="active">🇬🇧 English</button>
-          <button data-lang="id">🇮🇩 Indonesia</button>
-          <button data-lang="ja">🇯🇵 日本語</button>
-          <button data-lang="ar">🇸🇦 العربية</button>
-          <button data-lang="de">🇩🇪 Deutsch</button>
-        </div>
-      </div>
-      <button class="nav-btn" id="themeBtn" aria-label="Toggle theme">
-        <svg id="sunIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-        <svg id="moonIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      </button>
-      <button class="nav-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-      </button>
-    </div>
-  </header>
+<a class="skip" href="#main">Skip to content</a>
 
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    <nav>
-      <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#certs">Certifications</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
+<!-- Refraction filters. Two strengths: panels bend more than controls. -->
+<svg class="lg-svg" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="lg-refract" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feImage href="<?= e($mapUri) ?>" xlink:href="<?= e($mapUri) ?>" result="map" preserveAspectRatio="none" x="0" y="0" width="100%" height="100%"/>
+      <!-- Three passes at slightly different strengths, each isolated to one
+           channel, recombine into chromatic aberration at the rim. -->
+      <feDisplacementMap in="SourceGraphic" in2="map" scale="-82" xChannelSelector="R" yChannelSelector="G" result="dR"/>
+      <feColorMatrix in="dR" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="cR"/>
+      <feDisplacementMap in="SourceGraphic" in2="map" scale="-70" xChannelSelector="R" yChannelSelector="G" result="dG"/>
+      <feColorMatrix in="dG" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="cG"/>
+      <feDisplacementMap in="SourceGraphic" in2="map" scale="-58" xChannelSelector="R" yChannelSelector="G" result="dB"/>
+      <feColorMatrix in="dB" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="cB"/>
+      <feBlend in="cR" in2="cG" mode="screen" result="cRG"/>
+      <feBlend in="cRG" in2="cB" mode="screen" result="cRGB"/>
+      <feGaussianBlur in="cRGB" stdDeviation="0.32"/>
+    </filter>
 
-  <main>
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-      <div class="container">
-        <div class="hero-content">
-          <div class="hero-photo">
-            <div class="photo-glow"></div>
-            <img src="<?= htmlspecialchars($photo, ENT_QUOTES) ?>" alt="Muhamad Fikri Haikal" loading="eager">
-            <div class="photo-badge">
-              <span class="badge-dot"></span>
-              <span>Available for work</span>
-            </div>
-          </div>
-          <div class="hero-text">
-            <p class="hero-greeting">Hi, I'm</p>
-            <h1 class="hero-name">Fikri <span>Haikal</span></h1>
-            <p class="hero-title">Full-Stack Developer & AI Automation Engineer</p>
-            <p class="hero-desc">I ship production web apps and agentic workflows for teams across Malaysia, the US, and Germany. Currently at <strong>Growmodo</strong> building agency-grade digital products.</p>
-            <div class="hero-stats">
-              <div class="stat">
-                <span class="stat-num">3+</span>
-                <span class="stat-label">Years Exp</span>
-              </div>
-              <div class="stat">
-                <span class="stat-num">2</span>
-                <span class="stat-label">Live SaaS</span>
-              </div>
-              <div class="stat">
-                <span class="stat-num">23</span>
-                <span class="stat-label">Certifications</span>
-              </div>
-              <div class="stat">
-                <span class="stat-num">3</span>
-                <span class="stat-label">Countries</span>
-              </div>
-            </div>
-            <div class="hero-cta">
-              <a href="#experience" class="btn btn-primary">
-                <span>View Experience</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-              </a>
-              <a href="#contact" class="btn btn-secondary">Let's Talk</a>
-              <a href="<?= htmlspecialchars($linkedin, ENT_QUOTES) ?>" target="_blank" class="btn btn-icon" aria-label="LinkedIn">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-              </a>
-              <a href="<?= htmlspecialchars($github, ENT_QUOTES) ?>" target="_blank" class="btn btn-icon" aria-label="GitHub">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-              </a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Skills Marquee -->
-        <div class="skills-marquee">
-          <div class="marquee-track">
-            <?php foreach($skills as $skill): ?>
-              <span class="marquee-item"><?= htmlspecialchars($skill, ENT_QUOTES) ?></span>
-            <?php endforeach; ?>
-            <?php foreach($skills as $skill): ?>
-              <span class="marquee-item"><?= htmlspecialchars($skill, ENT_QUOTES) ?></span>
-            <?php endforeach; ?>
-          </div>
-        </div>
-      </div>
-    </section>
+    <filter id="lg-refract-deep" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feImage href="<?= e($mapUri) ?>" xlink:href="<?= e($mapUri) ?>" result="m" preserveAspectRatio="none" x="0" y="0" width="100%" height="100%"/>
+      <feDisplacementMap in="SourceGraphic" in2="m" scale="-150" xChannelSelector="R" yChannelSelector="G" result="pR"/>
+      <feColorMatrix in="pR" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="qR"/>
+      <feDisplacementMap in="SourceGraphic" in2="m" scale="-132" xChannelSelector="R" yChannelSelector="G" result="pG"/>
+      <feColorMatrix in="pG" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="qG"/>
+      <feDisplacementMap in="SourceGraphic" in2="m" scale="-114" xChannelSelector="R" yChannelSelector="G" result="pB"/>
+      <feColorMatrix in="pB" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="qB"/>
+      <feBlend in="qR" in2="qG" mode="screen" result="qRG"/>
+      <feBlend in="qRG" in2="qB" mode="screen" result="qRGB"/>
+      <feGaussianBlur in="qRGB" stdDeviation="0.5"/>
+    </filter>
+  </defs>
+</svg>
 
-    <!-- About Section -->
-    <section class="section" id="about">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-badge">About</span>
-          <h2 class="section-title">Builder. Automator. Product Owner.</h2>
-        </div>
-        <div class="about-content">
-          <div class="about-text">
-            <p>Gedex Network Inc. trusted me with custom WordPress plugins, Elementor UI, and API integrations. That work grew into <strong>AI-powered automation pipelines</strong> with n8n and OpenAI — content that ships across platforms without babysitting.</p>
-            <p>At <strong>Growmodo</strong> I deliver agency-grade sites on WordPress, Shopify, and Webflow, while running two live SaaS products solo. I've worked with clients and teams across <strong>Malaysia, the USA, and Germany</strong>.</p>
-            <p>Certified across <strong>AWS, Azure AI, Google Cloud MLOps, Make.com, and Anthropic Claude</strong>. I believe in building systems that run themselves and documenting everything for clean handoffs.</p>
-          </div>
-          <div class="about-cards">
-            <div class="about-card">
-              <div class="about-card-icon">📍</div>
-              <div class="about-card-content">
-                <span class="about-card-label">Location</span>
-                <span class="about-card-value">Kuala Perlis, Malaysia</span>
-              </div>
-            </div>
-            <div class="about-card">
-              <div class="about-card-icon">💼</div>
-              <div class="about-card-content">
-                <span class="about-card-label">Current Role</span>
-                <span class="about-card-value">Senior Full-Stack @ Growmodo</span>
-              </div>
-            </div>
-            <div class="about-card">
-              <div class="about-card-icon">🌐</div>
-              <div class="about-card-content">
-                <span class="about-card-label">Availability</span>
-                <span class="about-card-value">Remote, Hybrid, Relocation OK</span>
-              </div>
-            </div>
-            <div class="about-card">
-              <div class="about-card-icon">🗣️</div>
-              <div class="about-card-content">
-                <span class="about-card-label">Languages</span>
-                <span class="about-card-value">Malay, Indonesian, English, Arabic</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<div class="atmos" aria-hidden="true">
+  <div class="atmos__blob"></div>
+  <div class="atmos__blob"></div>
+  <div class="atmos__blob"></div>
+  <div class="atmos__grid"></div>
+  <div class="atmos__grain"></div>
+</div>
 
-    <!-- Experience Timeline -->
-    <section class="section" id="experience">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-badge">Experience</span>
-          <h2 class="section-title">Where the Work Happens</h2>
-          <p class="section-desc">Remote delivery across EU, US, and Malaysia time zones.</p>
-        </div>
-        <div class="timeline">
-          <?php foreach($jobs as $i => $job): ?>
-          <div class="timeline-item" data-index="<?= $i ?>">
-            <div class="timeline-marker">
-              <div class="timeline-dot"></div>
-              <?php if($i < count($jobs) - 1): ?><div class="timeline-line"></div><?php endif; ?>
-            </div>
-            <div class="timeline-content">
-              <div class="timeline-header">
-                <div>
-                  <h3 class="timeline-role"><?= htmlspecialchars($job['role'], ENT_QUOTES) ?></h3>
-                  <p class="timeline-company"><?= htmlspecialchars($job['company'], ENT_QUOTES) ?></p>
-                  <p class="timeline-location"><?= htmlspecialchars($job['location'], ENT_QUOTES) ?></p>
-                </div>
-                <div class="timeline-meta">
-                  <span class="timeline-period"><?= htmlspecialchars($job['period'], ENT_QUOTES) ?></span>
-                  <span class="timeline-type"><?= htmlspecialchars($job['type'], ENT_QUOTES) ?></span>
-                </div>
-              </div>
-              <ul class="timeline-bullets">
-                <?php foreach($job['bullets'] as $bullet): ?>
-                <li><?= htmlspecialchars($bullet, ENT_QUOTES) ?></li>
-                <?php endforeach; ?>
-              </ul>
-              <div class="timeline-stack">
-                <?php foreach($job['stack'] as $tech): ?>
-                <span class="tech-tag"><?= htmlspecialchars($tech, ENT_QUOTES) ?></span>
-                <?php endforeach; ?>
-              </div>
-            </div>
-          </div>
-          <?php endforeach; ?>
-        </div>
-      </div>
-    </section>
+<div class="progress" id="progress" aria-hidden="true"></div>
 
-    <!-- Projects Section -->
-    <section class="section" id="projects">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-badge">Projects</span>
-          <h2 class="section-title">Things I've Built</h2>
-          <p class="section-desc">From SaaS products to AI automation systems.</p>
-        </div>
-        <div class="projects-grid">
-          <?php foreach($projects as $project): ?>
-          <article class="project-card">
-            <div class="project-icon"><?= $project['icon'] ?></div>
-            <h3 class="project-name"><?= htmlspecialchars($project['name'], ENT_QUOTES) ?></h3>
-            <p class="project-desc"><?= htmlspecialchars($project['desc'], ENT_QUOTES) ?></p>
-            <?php if($project['link']): ?>
-            <a href="<?= htmlspecialchars($project['link'], ENT_QUOTES) ?>" target="_blank" class="project-link">
-              <span>Visit Site</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-            </a>
-            <?php endif; ?>
-          </article>
-          <?php endforeach; ?>
-        </div>
-      </div>
-    </section>
+<!-- ============================================================== navbar -->
+<header class="nav" id="nav">
+  <div class="nav__bar lg lg--elastic lg--deep" data-elastic="0.06">
+    <span class="lg-refract"></span>
+    <span class="lg-hl"></span>
+    <div class="lg-in nav__row">
+      <a class="nav__brand" href="#top">
+        <span class="nav__mark" aria-hidden="true">FH</span>
+        <span>Fikri Haikal</span>
+      </a>
 
-    <!-- Skills Section -->
-    <section class="section" id="skills">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-badge">Skills</span>
-          <h2 class="section-title">My Toolkit</h2>
-          <p class="section-desc">Technologies and tools I use daily.</p>
-        </div>
-        <div class="skills-grid">
-          <?php foreach($skillGroups as $group): ?>
-          <div class="skill-category">
-            <div class="skill-category-header">
-              <span class="skill-icon"><?= $group['icon'] ?></span>
-              <h3 class="skill-category-name"><?= htmlspecialchars($group['name'], ENT_QUOTES) ?></h3>
-            </div>
-            <div class="skill-tags">
-              <?php foreach($group['items'] as $item): ?>
-              <span class="skill-tag"><?= htmlspecialchars($item, ENT_QUOTES) ?></span>
+      <nav class="nav__links" aria-label="Sections">
+        <span class="nav__pin" id="navPin" aria-hidden="true"></span>
+        <a class="nav__link" href="#about"    data-i18n="nav.about"><?= e($s['nav']['about']) ?></a>
+        <a class="nav__link" href="#work"     data-i18n="nav.work"><?= e($s['nav']['work']) ?></a>
+        <a class="nav__link" href="#projects" data-i18n="nav.projects"><?= e($s['nav']['projects']) ?></a>
+        <a class="nav__link" href="#skills"   data-i18n="nav.skills"><?= e($s['nav']['skills']) ?></a>
+        <a class="nav__link" href="#certs"    data-i18n="nav.certs"><?= e($s['nav']['certs']) ?></a>
+        <a class="nav__link" href="#contact"  data-i18n="nav.contact"><?= e($s['nav']['contact']) ?></a>
+      </nav>
+
+      <div class="nav__actions">
+        <div class="lang" id="lang">
+          <button class="lg lg-btn lg-btn--sm" id="langBtn" type="button"
+                  aria-haspopup="listbox" aria-expanded="false"
+                  aria-label="<?= e($s['ui']['lang']) ?>" data-i18n-attr="aria-label:ui.lang">
+            <?= fh_icon('languages', 16) ?>
+            <span id="langLabel"><?= e(strtoupper($loc)) ?></span>
+            <?= fh_icon('chevron', 13) ?>
+          </button>
+          <div class="lang__menu lg" id="langMenu" role="listbox">
+            <div class="lg-in">
+              <?php foreach (FH_LOCALES as $code => $meta): ?>
+              <button class="lang__opt<?= $code === $loc ? ' is-active' : '' ?>" type="button"
+                      role="option" aria-selected="<?= $code === $loc ? 'true' : 'false' ?>"
+                      data-lang="<?= e($code) ?>">
+                <span class="lang__tag"><?= e(strtoupper($code)) ?></span>
+                <span><?= e($meta['native']) ?></span>
+              </button>
               <?php endforeach; ?>
             </div>
           </div>
-          <?php endforeach; ?>
+        </div>
+
+        <button class="lg lg-btn lg-btn--icon" id="themeBtn" type="button"
+                aria-label="<?= e($s['ui']['theme']) ?>" data-i18n-attr="aria-label:ui.theme">
+          <span class="theme__icons">
+            <?= fh_icon('sun', 18, 'ico ico--sun') ?>
+            <?= fh_icon('moon', 18, 'ico ico--moon') ?>
+          </span>
+        </button>
+
+        <button class="lg lg-btn lg-btn--icon nav__burger" id="burger" type="button"
+                aria-expanded="false" aria-controls="sheet"
+                aria-label="<?= e($s['ui']['menu']) ?>" data-i18n-attr="aria-label:ui.menu">
+          <?= fh_icon('menu', 19) ?>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="sheet" id="sheet">
+  <div class="sheet__panel lg lg-panel">
+    <span class="lg-refract"></span>
+    <div class="lg-in">
+      <?php foreach ($s['nav'] as $key => $label): ?>
+      <a class="sheet__link" href="#<?= e($key === 'work' ? 'work' : $key) ?>">
+        <span data-i18n="nav.<?= e($key) ?>"><?= e($label) ?></span>
+        <?= fh_icon('arrow-right', 18) ?>
+      </a>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ================================================================ hero -->
+<section class="hero">
+  <div class="shell">
+    <div class="hero__grid">
+      <div>
+        <span class="hero__eyebrow lg lg-pill rv">
+          <span class="lg-in" style="display:contents">
+            <span class="hero__dot" aria-hidden="true"></span>
+            <span data-i18n="hero.available"><?= e($s['hero']['available']) ?></span>
+          </span>
+        </span>
+
+        <h1 class="hero__name rv" style="--rv-d:60ms">
+          Muhamad<br><em>Fikri Haikal</em>
+        </h1>
+
+        <p class="hero__role rv" style="--rv-d:140ms">
+          <span class="hero__typed" id="typed"><?= e($s['hero']['roles'][0]) ?></span>
+          <span class="hero__caret" aria-hidden="true"></span>
+        </p>
+
+        <p class="hero__lead rv" style="--rv-d:200ms" data-i18n="hero.lead"><?= e($s['hero']['lead']) ?></p>
+
+        <div class="hero__cta rv" style="--rv-d:260ms">
+          <a class="lg lg-btn lg-btn--accent lg--elastic" href="#contact" data-elastic="0.18">
+            <span class="lg-hl"></span>
+            <span data-i18n="hero.cta1"><?= e($s['hero']['cta1']) ?></span>
+            <?= fh_icon('arrow-right', 17) ?>
+          </a>
+          <a class="lg lg-btn lg--elastic" href="#projects" data-elastic="0.18">
+            <span class="lg-refract"></span>
+            <span class="lg-hl"></span>
+            <span data-i18n="hero.cta2"><?= e($s['hero']['cta2']) ?></span>
+            <?= fh_icon('arrow-down', 17) ?>
+          </a>
+          <a class="lg lg-btn lg-btn--icon lg--elastic" href="<?= e($p['linkedin']) ?>"
+             target="_blank" rel="noopener" aria-label="LinkedIn">
+            <span class="lg-hl"></span><?= fh_icon('linkedin', 16) ?>
+          </a>
+          <a class="lg lg-btn lg-btn--icon lg--elastic" href="<?= e($p['github']) ?>"
+             target="_blank" rel="noopener" aria-label="GitHub">
+            <span class="lg-hl"></span><?= fh_icon('github', 16) ?>
+          </a>
+        </div>
+
+        <p class="hero__based rv" style="--rv-d:320ms">
+          <?= fh_icon('location', 15) ?>
+          <span data-i18n="hero.based"><?= e($s['hero']['based']) ?></span>
+        </p>
+      </div>
+
+      <figure class="hero__figure rv rv--scale" style="--rv-d:120ms">
+        <span class="hero__ring" aria-hidden="true"></span>
+        <div class="hero__frame lg lg--over-light lg--deep" id="heroFrame">
+          <span class="lg-refract"></span>
+          <div class="lg-in">
+            <img class="hero__photo" src="<?= e($p['photo']) ?>"
+                 alt="<?= e($p['name']) ?>" width="1023" height="1537" fetchpriority="high">
+          </div>
+        </div>
+        <div class="hero__chip hero__chip--tl lg" data-plx="0.03">
+          <span class="lg-in">
+            <b>5+</b>
+            <span data-i18n="stats.0.label"><?= e($s['stats'][0]['label']) ?></span>
+          </span>
+        </div>
+        <div class="hero__chip hero__chip--br lg" data-plx="-0.035">
+          <span class="lg-in">
+            <b>24</b>
+            <span data-i18n="stats.1.label"><?= e($s['stats'][1]['label']) ?></span>
+          </span>
+        </div>
+      </figure>
+    </div>
+
+    <div class="stats">
+      <?php foreach ($s['stats'] as $i => $stat): ?>
+      <div class="stat lg lg--elastic rv" style="--rv-d:<?= 80 * $i ?>ms">
+        <span class="lg-hl"></span>
+        <div class="lg-in">
+          <div class="stat__n" data-i18n="stats.<?= $i ?>.n"><?= e($stat['n']) ?></div>
+          <div class="stat__l" data-i18n="stats.<?= $i ?>.label"><?= e($stat['label']) ?></div>
         </div>
       </div>
-    </section>
+      <?php endforeach; ?>
+    </div>
 
-    <!-- Certifications Section -->
-    <section class="section" id="certs">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-badge">Certifications</span>
-          <h2 class="section-title">23 Verified Credentials</h2>
-          <p class="section-desc">Continuous learning across cloud, AI, and web development.</p>
+    <div class="marquee rv" aria-hidden="true">
+      <div class="marquee__track">
+        <?php for ($pass = 0; $pass < 2; $pass++): ?>
+          <?php foreach (FH_MARQUEE as $tech): ?>
+          <span class="marquee__item"><?= e($tech) ?></span>
+          <?php endforeach; ?>
+        <?php endfor; ?>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================================== about -->
+<section class="sect" id="about">
+  <div class="shell">
+    <div class="about__grid">
+      <div class="about__rail">
+        <span class="sect__badge lg lg-pill rv">
+          <span class="lg-in" data-i18n="about.badge"><?= e($s['about']['badge']) ?></span>
+        </span>
+        <h2 class="sect__title rv" data-split data-i18n="about.title"><?= e($s['about']['title']) ?></h2>
+        <p class="about__lead rv" style="--rv-d:120ms" data-i18n="about.lead"><?= e($s['about']['lead']) ?></p>
+      </div>
+
+      <div>
+        <div class="about__body rv">
+          <p data-i18n="about.p1"><?= e($s['about']['p1']) ?></p>
+          <p data-i18n="about.p2"><?= e($s['about']['p2']) ?></p>
         </div>
-        <div class="certs-grid">
-          <?php foreach($certs as $cert): ?>
-          <div class="cert-card">
-            <div class="cert-badge"></div>
-            <div class="cert-content">
-              <h4 class="cert-name"><?= htmlspecialchars($cert['name'], ENT_QUOTES) ?></h4>
-              <p class="cert-issuer"><?= htmlspecialchars($cert['issuer'], ENT_QUOTES) ?></p>
-              <p class="cert-date"><?= htmlspecialchars($cert['date'], ENT_QUOTES) ?></p>
+        <div class="about__cards">
+          <?php foreach ($s['about']['cards'] as $i => $card): ?>
+          <div class="about__card lg lg--elastic rv" style="--rv-d:<?= 90 * $i ?>ms">
+            <span class="lg-refract"></span>
+            <span class="lg-hl"></span>
+            <div class="lg-in icon-tile"><?= fh_icon($card['icon'], 20) ?></div>
+            <div class="lg-in">
+              <h3 data-i18n="about.cards.<?= $i ?>.title"><?= e($card['title']) ?></h3>
+              <p data-i18n="about.cards.<?= $i ?>.text"><?= e($card['text']) ?></p>
             </div>
           </div>
           <?php endforeach; ?>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="section" id="contact">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-badge">Contact</span>
-          <h2 class="section-title">Let's Build Something Together</h2>
-          <p class="section-desc">Have a project, role, or idea? I'd love to hear about it.</p>
-        </div>
-        <div class="contact-grid">
-          <div class="contact-info">
-            <a href="mailto:<?= htmlspecialchars($email, ENT_QUOTES) ?>" class="contact-card">
-              <div class="contact-icon">📧</div>
-              <div>
-                <span class="contact-label">Email</span>
-                <span class="contact-value"><?= htmlspecialchars($email, ENT_QUOTES) ?></span>
-              </div>
-            </a>
-            <a href="tel:<?= htmlspecialchars($phoneHref, ENT_QUOTES) ?>" class="contact-card">
-              <div class="contact-icon">📱</div>
-              <div>
-                <span class="contact-label">Phone / WhatsApp</span>
-                <span class="contact-value"><?= htmlspecialchars($phone, ENT_QUOTES) ?></span>
-              </div>
-            </a>
-            <a href="<?= htmlspecialchars($linkedin, ENT_QUOTES) ?>" target="_blank" class="contact-card">
-              <div class="contact-icon">💼</div>
-              <div>
-                <span class="contact-label">LinkedIn</span>
-                <span class="contact-value">muhamad-fikri-haikal</span>
-              </div>
-            </a>
-            <div class="contact-card">
-              <div class="contact-icon">📍</div>
-              <div>
-                <span class="contact-label">Location</span>
-                <span class="contact-value">Kuala Perlis, Perlis, Malaysia</span>
-              </div>
-            </div>
-          </div>
-          <form class="contact-form" id="contactForm">
-            <div class="form-row">
-              <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" placeholder="Your name" required>
-              </div>
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="you@company.com" required>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" rows="5" placeholder="Tell me about your project, role, or idea..." required></textarea>
-            </div>
-            <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
-            <button type="submit" class="btn btn-primary btn-full">
-              <span>Send Message</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-            </button>
-            <p class="form-status" id="formStatus"></p>
-          </form>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <p>© 2026 Muhamad Fikri Haikal. Built with HTML, CSS, JS & PHP.</p>
-        <div class="footer-links">
-          <a href="<?= htmlspecialchars($linkedin, ENT_QUOTES) ?>" target="_blank" aria-label="LinkedIn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          </a>
-          <a href="<?= htmlspecialchars($github, ENT_QUOTES) ?>" target="_blank" aria-label="GitHub">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          </a>
-          <a href="mailto:<?= htmlspecialchars($email, ENT_QUOTES) ?>" aria-label="Email">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </a>
         </div>
       </div>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script src="assets/js/main.js"></script>
+<!-- ========================================================== experience -->
+<section class="sect" id="work">
+  <div class="shell">
+    <div class="sect__head">
+      <span class="sect__badge lg lg-pill rv">
+        <span class="lg-in" data-i18n="work.badge"><?= e($s['work']['badge']) ?></span>
+      </span>
+      <h2 class="sect__title rv" data-split data-i18n="work.title"><?= e($s['work']['title']) ?></h2>
+      <p class="sect__desc rv" style="--rv-d:100ms" data-i18n="work.desc"><?= e($s['work']['desc']) ?></p>
+    </div>
+
+    <div class="work">
+      <div class="work__rail" id="workRail" aria-hidden="true">
+        <div class="work__year" id="workYear"><?= e(FH_JOBS[0]['year']) ?></div>
+      </div>
+
+      <div class="work__list">
+        <?php foreach (FH_JOBS as $i => $job):
+          $jt = $s['work']['jobs'][$job['slug']];
+          $period = $job['from'] . ' – ' . ($job['to'] ?? $s['work']['present']);
+        ?>
+        <article class="job lg lg--elastic rv" data-year="<?= e($job['year']) ?>" style="--rv-d:<?= 70 * $i ?>ms">
+          <span class="lg-refract"></span>
+          <span class="lg-hl"></span>
+          <span class="job__node" aria-hidden="true"></span>
+          <div class="lg-in">
+            <div class="job__top" aria-expanded="<?= $i === 0 ? 'true' : 'false' ?>">
+              <div class="lg-in icon-tile"><?= fh_icon($job['icon'], 19) ?></div>
+              <div>
+                <h3 class="job__role" data-i18n="work.jobs.<?= e($job['slug']) ?>.role"><?= e($jt['role']) ?></h3>
+                <p class="job__co"><?= e($job['company']) ?></p>
+                <div class="job__meta">
+                  <span><?= fh_icon('location', 14) ?><?= e($job['city']) ?></span>
+                  <span><?= fh_icon('clock', 14) ?><span data-period="<?= e($job['from']) ?>"><?= e($period) ?></span></span>
+                  <span><?= fh_icon('briefcase', 14) ?><span data-i18n="work.jobs.<?= e($job['slug']) ?>.type"><?= e($jt['type']) ?></span></span>
+                </div>
+              </div>
+              <span class="job__chev"><?= fh_icon('chevron', 20) ?></span>
+            </div>
+
+            <div class="job__body" id="jobBody<?= $i ?>">
+              <div>
+                <ul class="job__bullets">
+                  <?php foreach ($jt['bullets'] as $b => $bullet): ?>
+                  <li data-i18n="work.jobs.<?= e($job['slug']) ?>.bullets.<?= $b ?>"><?= e($bullet) ?></li>
+                  <?php endforeach; ?>
+                </ul>
+                <div class="chips">
+                  <?php foreach ($job['stack'] as $tech): ?>
+                  <span class="chip"><?= e($tech) ?></span>
+                  <?php endforeach; ?>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ projects — pinned sideways -->
+<section class="sect" id="projects" style="padding-bottom:0">
+  <div class="shell">
+    <div class="sect__head">
+      <span class="sect__badge lg lg-pill rv">
+        <span class="lg-in" data-i18n="projects.badge"><?= e($s['projects']['badge']) ?></span>
+      </span>
+      <h2 class="sect__title rv" data-split data-i18n="projects.title"><?= e($s['projects']['title']) ?></h2>
+      <p class="sect__desc rv" style="--rv-d:100ms" data-i18n="projects.desc"><?= e($s['projects']['desc']) ?></p>
+    </div>
+  </div>
+
+  <div class="hscroll" id="projectsPin">
+    <div class="hscroll__stage">
+      <div class="hscroll__track">
+        <?php foreach (FH_PROJECTS as $i => $proj): ?>
+        <article class="pcard lg lg--elastic lg--deep">
+          <span class="lg-refract"></span>
+          <span class="lg-hl"></span>
+          <div class="lg-in" style="display:flex;flex-direction:column;flex:1">
+            <span class="pcard__n"><?= str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) ?> / <?= str_pad((string) count(FH_PROJECTS), 2, '0', STR_PAD_LEFT) ?></span>
+            <div class="pcard__icon"><?= fh_icon($proj['icon'], 24) ?></div>
+            <h3 class="pcard__name"><?= e($proj['name']) ?></h3>
+            <p class="pcard__desc" data-i18n="projects.items.<?= e($proj['slug']) ?>"><?= e($s['projects']['items'][$proj['slug']]) ?></p>
+            <div class="pcard__foot">
+              <div class="chips">
+                <?php foreach ($proj['tags'] as $tag): ?>
+                <span class="chip"><?= e($tag) ?></span>
+                <?php endforeach; ?>
+              </div>
+              <?php if ($proj['link']): ?>
+              <a class="pcard__link" href="<?= e($proj['link']) ?>" target="_blank" rel="noopener">
+                <span data-i18n="projects.visit"><?= e($s['projects']['visit']) ?></span>
+                <?= fh_icon('arrow-out', 15) ?>
+              </a>
+              <?php endif; ?>
+            </div>
+          </div>
+        </article>
+        <?php endforeach; ?>
+      </div>
+      <p class="hscroll__hint">
+        <span data-i18n="projects.hint"><?= e($s['projects']['hint']) ?></span>
+        <?= fh_icon('arrow-right', 16) ?>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================== skills -->
+<section class="sect" id="skills">
+  <div class="shell">
+    <div class="sect__head">
+      <span class="sect__badge lg lg-pill rv">
+        <span class="lg-in" data-i18n="skills.badge"><?= e($s['skills']['badge']) ?></span>
+      </span>
+      <h2 class="sect__title rv" data-split data-i18n="skills.title"><?= e($s['skills']['title']) ?></h2>
+      <p class="sect__desc rv" style="--rv-d:100ms" data-i18n="skills.desc"><?= e($s['skills']['desc']) ?></p>
+    </div>
+
+    <div class="skills__grid">
+      <?php foreach (FH_SKILL_GROUPS as $i => $group): ?>
+      <div class="sgroup lg lg--elastic rv" style="--rv-d:<?= 60 * $i ?>ms">
+        <span class="lg-refract"></span>
+        <span class="lg-hl"></span>
+        <div class="lg-in">
+          <div class="sgroup__head">
+            <span class="icon-tile"><?= fh_icon($group['icon'], 20) ?></span>
+            <h3 data-i18n="skills.groups.<?= e($group['slug']) ?>"><?= e($s['skills']['groups'][$group['slug']]) ?></h3>
+          </div>
+          <div class="chips">
+            <?php foreach ($group['items'] as $item): ?>
+            <span class="chip"><?= e($item) ?></span>
+            <?php endforeach; ?>
+          </div>
+        </div>
+      </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= credentials -->
+<section class="sect" id="certs">
+  <div class="shell">
+    <div class="sect__head">
+      <span class="sect__badge lg lg-pill rv">
+        <span class="lg-in" data-i18n="certs.badge"><?= e($s['certs']['badge']) ?></span>
+      </span>
+      <h2 class="sect__title rv" data-split data-i18n="certs.title"><?= e($s['certs']['title']) ?></h2>
+      <p class="sect__desc rv" style="--rv-d:100ms" data-i18n="certs.desc"><?= e($s['certs']['desc']) ?></p>
+    </div>
+
+    <div class="certs__tabs rv" role="tablist">
+      <?php foreach ($s['certs']['filters'] as $key => $label): ?>
+      <button class="lg-tab<?= $key === 'all' ? ' is-active' : '' ?>" type="button" role="tab"
+              aria-selected="<?= $key === 'all' ? 'true' : 'false' ?>" data-group="<?= e($key) ?>"
+              data-i18n="certs.filters.<?= e($key) ?>"><?= e($label) ?></button>
+      <?php endforeach; ?>
+    </div>
+
+    <div class="certs__grid">
+      <?php foreach ($certsJs as $i => $cert): ?>
+      <button class="cert lg lg--elastic rv" type="button"
+              data-slug="<?= e($cert['slug']) ?>" data-group="<?= e($cert['group']) ?>"
+              style="--rv-d:<?= 40 * ($i % 8) ?>ms"
+              aria-label="<?= e($cert['name'] . ' — ' . $cert['issuer']) ?>">
+        <span class="lg-hl"></span>
+        <span class="cert__art">
+          <?= $cert['art'] ?>
+          <span class="cert__zoom"><span><?= fh_icon('zoom', 20) ?></span></span>
+        </span>
+        <span class="cert__body lg-in">
+          <span class="cert__name"><?= e($cert['name']) ?></span>
+          <span class="cert__issuer"><?= e($cert['issuer']) ?></span>
+          <span class="cert__date"></span>
+          <span class="cert__foot<?= $cert['verify'] ? ' is-verified' : '' ?>">
+            <?= fh_icon('verified', 14) ?><span></span>
+          </span>
+        </span>
+      </button>
+      <?php endforeach; ?>
+    </div>
+    <p class="certs__empty" id="certsEmpty" hidden data-i18n="certs.empty"><?= e($s['certs']['empty']) ?></p>
+  </div>
+</section>
+
+<!-- ============================================================= contact -->
+<section class="sect" id="contact">
+  <div class="shell">
+    <div class="sect__head">
+      <span class="sect__badge lg lg-pill rv">
+        <span class="lg-in" data-i18n="contact.badge"><?= e($s['contact']['badge']) ?></span>
+      </span>
+      <h2 class="sect__title rv" data-split data-i18n="contact.title"><?= e($s['contact']['title']) ?></h2>
+      <p class="sect__desc rv" style="--rv-d:100ms" data-i18n="contact.desc"><?= e($s['contact']['desc']) ?></p>
+    </div>
+
+    <div class="contact__grid">
+      <div class="contact__aside">
+        <a class="crow lg lg--elastic rv" href="mailto:<?= e($p['email']) ?>">
+          <span class="lg-hl"></span>
+          <span class="lg-in icon-tile"><?= fh_icon('mail', 19) ?></span>
+          <span class="lg-in">
+            <span class="crow__l" data-i18n="contact.emailLabel"><?= e($s['contact']['emailLabel']) ?></span>
+            <span class="crow__v"><?= e($p['email']) ?></span>
+          </span>
+          <span class="lg-in crow__go"><?= fh_icon('arrow-out', 16) ?></span>
+        </a>
+
+        <a class="crow lg lg--elastic rv" style="--rv-d:70ms" href="tel:<?= e($p['phone_href']) ?>">
+          <span class="lg-hl"></span>
+          <span class="lg-in icon-tile"><?= fh_icon('phone', 19) ?></span>
+          <span class="lg-in">
+            <span class="crow__l" data-i18n="contact.phoneLabel"><?= e($s['contact']['phoneLabel']) ?></span>
+            <span class="crow__v"><?= e($p['phone']) ?></span>
+          </span>
+          <span class="lg-in crow__go"><?= fh_icon('arrow-out', 16) ?></span>
+        </a>
+
+        <div class="crow lg rv" style="--rv-d:140ms">
+          <span class="lg-in icon-tile"><?= fh_icon('clock', 19) ?></span>
+          <span class="lg-in">
+            <span class="crow__l" data-i18n="contact.timeLabel"><?= e($s['contact']['timeLabel']) ?></span>
+            <span class="crow__v" id="clock">—</span>
+          </span>
+          <span></span>
+        </div>
+
+        <div class="socials rv" style="--rv-d:200ms">
+          <a class="lg lg-btn lg-btn--sm lg--elastic" href="<?= e($p['linkedin']) ?>" target="_blank" rel="noopener">
+            <span class="lg-hl"></span><?= fh_icon('linkedin', 15) ?><span>LinkedIn</span>
+          </a>
+          <a class="lg lg-btn lg-btn--sm lg--elastic" href="<?= e($p['github']) ?>" target="_blank" rel="noopener">
+            <span class="lg-hl"></span><?= fh_icon('github', 15) ?><span>GitHub</span>
+          </a>
+        </div>
+      </div>
+
+      <form class="form lg lg-panel rv" style="--rv-d:80ms" id="contactForm" action="api/contact.php" method="post">
+        <span class="lg-refract"></span>
+        <div class="lg-in" style="display:grid;gap:.85rem">
+          <div class="field">
+            <label for="cname" data-i18n="contact.name"><?= e($s['contact']['name']) ?></label>
+            <input id="cname" name="name" type="text" required maxlength="120" autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="cmail" data-i18n="contact.email"><?= e($s['contact']['email']) ?></label>
+            <input id="cmail" name="email" type="email" required maxlength="160" autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="cmsg" data-i18n="contact.msg"><?= e($s['contact']['msg']) ?></label>
+            <textarea id="cmsg" name="message" required maxlength="4000"></textarea>
+          </div>
+
+          <label class="honey" for="website">Website</label>
+          <input class="honey" id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+
+          <button class="lg lg-btn lg-btn--accent lg--elastic" id="formSubmit" type="submit" data-elastic="0.16">
+            <span class="lg-hl"></span>
+            <span id="formSubmitLabel" data-i18n="contact.send"><?= e($s['contact']['send']) ?></span>
+            <?= fh_icon('send', 16) ?>
+          </button>
+          <p class="form__note" id="formNote" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="shell foot__grid">
+    <p class="foot__text">
+      <strong>&copy; <?= date('Y') ?> <?= e($p['name']) ?>.</strong>
+      <span data-i18n="footer.rights"><?= e($s['footer']['rights']) ?></span><br>
+      <span data-i18n="footer.built"><?= e($s['footer']['built']) ?></span>
+    </p>
+    <a class="lg lg-btn lg-btn--sm lg--elastic" href="#top">
+      <span class="lg-hl"></span>
+      <span data-i18n="footer.top"><?= e($s['footer']['top']) ?></span>
+      <?= fh_icon('arrow-down', 15, 'ico ico--up') ?>
+    </a>
+  </div>
+</footer>
+
+<!-- =============================================== credential lightbox -->
+<div class="cmodal" id="certModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="cmName">
+  <button class="cmodal__scrim" id="cmScrim" type="button" tabindex="-1" aria-label="<?= e($s['certs']['close']) ?>"></button>
+  <div class="cmodal__panel lg lg-panel lg--deep">
+    <span class="lg-refract"></span>
+    <button class="cmodal__close lg lg-btn lg-btn--icon lg--elastic" id="cmClose" type="button"
+            aria-label="<?= e($s['certs']['close']) ?>" data-i18n-attr="aria-label:certs.close">
+      <span class="lg-hl"></span><?= fh_icon('close', 18) ?>
+    </button>
+    <div class="lg-in cmodal__grid">
+      <div class="cmodal__art" id="cmArt"></div>
+      <div class="cmodal__side">
+        <h3 class="cmodal__name" id="cmName"></h3>
+        <p class="cmodal__issuer" id="cmIssuer"></p>
+        <dl class="cmodal__rows" id="cmRows"></dl>
+        <div class="cmodal__skills" id="cmSkills">
+          <h4 data-i18n="certs.skills"><?= e($s['certs']['skills']) ?></h4>
+          <div class="chips" id="cmChips"></div>
+        </div>
+        <a class="lg lg-btn lg-btn--accent lg--elastic" id="cmVerify" href="#" target="_blank" rel="noopener">
+          <span class="lg-hl"></span>
+          <span id="cmVerifyLabel"><?= e($s['certs']['verify']) ?></span>
+          <?= fh_icon('arrow-out', 16) ?>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  window.FH_I18N = <?= json_encode(FH_STRINGS, $jsonFlags) ?>;
+  window.FH_DATA = {
+    locales: <?= json_encode(FH_LOCALES, $jsonFlags) ?>,
+    certs: <?= json_encode($certsJs, $jsonFlags) ?>
+  };
+</script>
+<script src="assets/js/scroll.js"></script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>

@@ -207,7 +207,7 @@
       var el = document.querySelector(id);
       if (!el) return;
       e.preventDefault();
-      var top = el.getBoundingClientRect().top + window.scrollY - (id === "#top" ? 0 : 84);
+      var top = el.getBoundingClientRect().top + window.scrollY - (id === "#top" ? 0 : (window.innerWidth <= 900 ? 20 : 84));
       if (window.FH_SCROLL) window.FH_SCROLL.scrollTo(top);
       else window.scrollTo(0, top);
     });

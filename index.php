@@ -65,7 +65,7 @@ $certsJs = array_map(static function (array $c): array {
   ];
 }, FH_CERTS);
 
-$assetV = '20260911d';
+$assetV = '20260911e';
 $jsonFlags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
 ?>
 <!DOCTYPE html>
@@ -224,7 +224,7 @@ $jsonFlags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
 <section class="hero">
   <div class="shell">
     <div class="hero__grid">
-      <div>
+      <div class="hero__copy">
         <span class="hero__eyebrow lg lg-pill rv">
           <span class="lg-in" style="display:contents">
             <span class="hero__dot" aria-hidden="true"></span>

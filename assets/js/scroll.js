@@ -83,7 +83,11 @@ window.FH_SCROLL = (function () {
         return;
       }
 
+      // Reset transform before measuring so scrollWidth is the true track length.
+      track.style.transform = "translate3d(0,0,0)";
       var dist = Math.max(0, track.scrollWidth - window.innerWidth);
+      // Small runway buffer so the last card settles before the section unpins.
+      dist = Math.ceil(dist + Math.min(120, window.innerWidth * 0.06));
       pin._dist = dist;
       // Extra vertical runway equals the horizontal distance to travel, so the
       // rail finishes exactly as the section unpins.
@@ -296,6 +300,21 @@ window.FH_SCROLL = (function () {
     window.addEventListener("load", function () {
       measurePins();
       dirty = true;
+    });
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () {
+        measurePins();
+        dirty = true;
+      });
+    }
+
+    // Remeasure once layout has settled (card widths depend on clamp/vw).
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        measurePins();
+        dirty = true;
+      });
     });
 
     requestAnimationFrame(frame);

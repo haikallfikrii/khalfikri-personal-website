@@ -45,7 +45,8 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
-  overflow-x: hidden;
+  /* clip (not hidden) so sticky horizontal project pin still works */
+  overflow-x: clip;
   max-width: 100%;
 }
 
@@ -62,7 +63,7 @@ body {
   font-size: 1rem;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100%;
 }
 
@@ -1017,6 +1018,7 @@ p {
 
 .hscroll__view {
   width: 100%;
+  overflow: hidden;
 }
 
 .hscroll__track {

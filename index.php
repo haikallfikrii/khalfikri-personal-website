@@ -65,7 +65,7 @@ $certsJs = array_map(static function (array $c): array {
   ];
 }, FH_CERTS);
 
-$assetV = '20260911f';
+$assetV = '20260911g';
 $jsonFlags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
 ?>
 <!DOCTYPE html>
@@ -430,32 +430,34 @@ $jsonFlags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
 
   <div class="hscroll" id="projectsPin">
     <div class="hscroll__stage">
-      <div class="hscroll__track">
-        <?php foreach (FH_PROJECTS as $i => $proj): ?>
-        <article class="pcard lg lg--elastic lg--deep">
-          <span class="lg-refract"></span>
-          <span class="lg-hl"></span>
-          <div class="lg-in" style="display:flex;flex-direction:column;flex:1">
-            <span class="pcard__n"><?= str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) ?> / <?= str_pad((string) count(FH_PROJECTS), 2, '0', STR_PAD_LEFT) ?></span>
-            <div class="pcard__icon"><?= fh_icon($proj['icon'], 24) ?></div>
-            <h3 class="pcard__name"><?= e($proj['name']) ?></h3>
-            <p class="pcard__desc" data-i18n="projects.items.<?= e($proj['slug']) ?>"><?= e($s['projects']['items'][$proj['slug']]) ?></p>
-            <div class="pcard__foot">
-              <div class="chips">
-                <?php foreach ($proj['tags'] as $tag): ?>
-                <span class="chip"><?= e($tag) ?></span>
-                <?php endforeach; ?>
+      <div class="hscroll__view">
+        <div class="hscroll__track">
+          <?php foreach (FH_PROJECTS as $i => $proj): ?>
+          <article class="pcard lg lg--elastic lg--deep">
+            <span class="lg-refract"></span>
+            <span class="lg-hl"></span>
+            <div class="lg-in" style="display:flex;flex-direction:column;flex:1">
+              <span class="pcard__n"><?= str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) ?> / <?= str_pad((string) count(FH_PROJECTS), 2, '0', STR_PAD_LEFT) ?></span>
+              <div class="pcard__icon"><?= fh_icon($proj['icon'], 24) ?></div>
+              <h3 class="pcard__name"><?= e($proj['name']) ?></h3>
+              <p class="pcard__desc" data-i18n="projects.items.<?= e($proj['slug']) ?>"><?= e($s['projects']['items'][$proj['slug']]) ?></p>
+              <div class="pcard__foot">
+                <div class="chips">
+                  <?php foreach ($proj['tags'] as $tag): ?>
+                  <span class="chip"><?= e($tag) ?></span>
+                  <?php endforeach; ?>
+                </div>
+                <?php if ($proj['link']): ?>
+                <a class="pcard__link" href="<?= e($proj['link']) ?>" target="_blank" rel="noopener">
+                  <span data-i18n="projects.visit"><?= e($s['projects']['visit']) ?></span>
+                  <?= fh_icon('arrow-out', 15) ?>
+                </a>
+                <?php endif; ?>
               </div>
-              <?php if ($proj['link']): ?>
-              <a class="pcard__link" href="<?= e($proj['link']) ?>" target="_blank" rel="noopener">
-                <span data-i18n="projects.visit"><?= e($s['projects']['visit']) ?></span>
-                <?= fh_icon('arrow-out', 15) ?>
-              </a>
-              <?php endif; ?>
             </div>
-          </div>
-        </article>
-        <?php endforeach; ?>
+          </article>
+          <?php endforeach; ?>
+        </div>
       </div>
       <p class="hscroll__hint">
         <span data-i18n="projects.hint"><?= e($s['projects']['hint']) ?></span>

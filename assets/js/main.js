@@ -222,8 +222,29 @@
 
   /* ---------- Reveal ---------- */
   let revealIO;
+
+  function revealVisible() {
+    document.querySelectorAll(".reveal:not(.in)").forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight + 80 && r.bottom > -80) {
+        el.classList.add("in");
+      }
+    });
+  }
+
   function observeReveals() {
     if (revealIO) revealIO.disconnect();
+    // Mark already-visible first, THEN enable hide-until-in animation
+    revealVisible();
+    document.querySelectorAll(".reveal").forEach((el) => {
+      // Above-the-fold must never stay blank on Hostinger / CF quirks
+      if (!el.classList.contains("in")) {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight) el.classList.add("in");
+      }
+    });
+    root.classList.add("js-ready");
+
     revealIO = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -233,9 +254,13 @@
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0, rootMargin: "80px 0px 80px 0px" }
     );
     document.querySelectorAll(".reveal:not(.in)").forEach((el) => revealIO.observe(el));
+    setTimeout(revealVisible, 100);
+    setTimeout(() => {
+      document.querySelectorAll(".reveal:not(.in)").forEach((el) => el.classList.add("in"));
+    }, 800);
   }
   observeReveals();
 

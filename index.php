@@ -10,286 +10,485 @@ $linkedin = 'https://www.linkedin.com/in/muhamad-fikri-haikal-fullstack-web-deve
 $github = 'https://github.com/haikallfikrii';
 $tabletap = 'https://tabletap.my';
 $chatlm = 'https://chatlm.tech';
-$skills = ['JavaScript', 'TypeScript', 'PHP 8', 'Python', 'React', 'Next.js', 'Node.js', 'Laravel', 'WordPress', 'Shopify', 'Webflow', 'n8n', 'Make.com', 'Zapier', 'AWS', 'GCP', 'MySQL', 'MongoDB', 'Stripe', 'OpenAI', 'Claude', 'LangChain'];
+
+// All skills for marquee
+$skills = ['JavaScript', 'TypeScript', 'PHP 8', 'Python', 'React', 'Next.js', 'Node.js', 'Laravel', 'WordPress', 'Shopify', 'Webflow', 'n8n', 'Make.com', 'Zapier', 'AWS', 'GCP', 'Azure', 'MySQL', 'MongoDB', 'PostgreSQL', 'Stripe', 'OpenAI', 'Claude', 'LangChain', 'Supabase', 'Tailwind CSS', 'GraphQL', 'REST API'];
+
+// All certifications from LinkedIn
+$certs = [
+  ['name' => 'Claude Code 101', 'issuer' => 'Anthropic', 'date' => 'Aug 2026', 'id' => 'dqjtmu5gbzwn'],
+  ['name' => 'MLOps for Generative AI', 'issuer' => 'Google Cloud Skills Boost', 'date' => 'Oct 2025', 'id' => '18854828'],
+  ['name' => 'Make Advanced', 'issuer' => 'Make.com', 'date' => 'Sep 2025', 'id' => ''],
+  ['name' => 'Make Intermediate', 'issuer' => 'Make.com', 'date' => 'Sep 2025', 'id' => ''],
+  ['name' => 'Make Foundation', 'issuer' => 'Make.com', 'date' => 'Sep 2025', 'id' => ''],
+  ['name' => 'Skills Boost Arcade Trivia Week 2', 'issuer' => 'Google', 'date' => 'Sep 2025', 'id' => '18076790'],
+  ['name' => 'Skills Boost Arcade Trivia Week 1', 'issuer' => 'Google', 'date' => 'Sep 2025', 'id' => '18073756'],
+  ['name' => 'AWS re/Start Graduate', 'issuer' => 'Amazon Web Services', 'date' => 'Nov 2024', 'id' => ''],
+  ['name' => 'Develop solutions with Azure AI Document Intelligence', 'issuer' => 'Microsoft', 'date' => 'Feb 2025', 'id' => ''],
+  ['name' => 'Develop AI agents using Azure OpenAI and Semantic Kernel SDK', 'issuer' => 'Microsoft', 'date' => 'Feb 2025', 'id' => ''],
+  ['name' => 'Get started with Azure AI Services', 'issuer' => 'Microsoft', 'date' => 'Feb 2025', 'id' => ''],
+  ['name' => 'Microsoft Azure Cloud Concepts', 'issuer' => 'Microsoft', 'date' => 'Feb 2025', 'id' => ''],
+  ['name' => 'Microsoft Azure AI Fundamentals', 'issuer' => 'Microsoft', 'date' => 'Feb 2025', 'id' => ''],
+  ['name' => 'AWS Cloud Practitioner', 'issuer' => 'Orbit Future Academy', 'date' => 'Sep 2024', 'id' => 'OFA/2024-09/AWS/AWSREST/16340'],
+  ['name' => 'Fullstack Web Development', 'issuer' => 'Harisenin.com', 'date' => 'Jul 2024', 'id' => 'HSBC/FSD/01/20240728052'],
+  ['name' => 'Responsive Web Design', 'issuer' => 'freeCodeCamp', 'date' => 'Mar 2024', 'id' => ''],
+  ['name' => 'PHP Programming', 'issuer' => 'Simplilearn', 'date' => 'Jun 2024', 'id' => '6755604'],
+  ['name' => 'Cambridge English Advanced (CAE)', 'issuer' => 'Cambridge English', 'date' => 'Jan 2024', 'id' => 'MY959_MSTFIKRI_HAIKAL'],
+  ['name' => 'Introduction to Information Security', 'issuer' => 'Cyber Academy Indonesia', 'date' => 'Jan 2024', 'id' => 'PKMI01101240118'],
+  ['name' => 'Microsoft Security, Compliance, and Identity Fundamentals', 'issuer' => 'Microsoft', 'date' => 'Jan 2024', 'id' => '70882_77'],
+  ['name' => 'UI/UX Design by Figma', 'issuer' => 'Kelas.com', 'date' => 'Sep 2023', 'id' => 'CERT-2FCF372C'],
+  ['name' => 'Back-End Development with JavaScript and Node.js', 'issuer' => 'Kelas.com', 'date' => 'Sep 2023', 'id' => 'CERT-196AF385'],
+  ['name' => 'WordPress Developer Certificate', 'issuer' => 'Habiskerja.com', 'date' => 'Feb 2024', 'id' => '010024/HK/22'],
+];
+
+// Experience timeline
+$jobs = [
+  [
+    'role' => 'Senior Full-Stack Developer / AI Expert',
+    'company' => 'Growmodo GmbH',
+    'location' => 'Leverkusen, Germany (Remote)',
+    'period' => 'Nov 2025 – Present',
+    'type' => 'Full-Time',
+    'bullets' => [
+      'Build high-performance client sites on WordPress, Shopify, Webflow with custom plugins and themes',
+      'Ship REST, GraphQL, third-party integrations focused on scale, security, and performance',
+      'Use AI to accelerate development, QA, and documentation across distributed teams',
+    ],
+    'stack' => ['Next.js', 'PHP', 'WordPress', 'Shopify', 'Webflow', 'n8n', 'AWS'],
+  ],
+  [
+    'role' => 'Full-Stack · AI Automation · API Specialist',
+    'company' => 'Gedex Network Inc.',
+    'location' => 'Carson City, USA (Remote)',
+    'period' => 'Jan 2025 – Present',
+    'type' => 'Part-Time',
+    'bullets' => [
+      'Own custom WordPress plugins, REST APIs, and Elementor UI for CaasEdu products',
+      'Design end-to-end n8n / Make / LLM pipelines for AI content and multi-platform publishing',
+      'Build Google Apps Script flows that process Sheets into automated publishing CSVs',
+    ],
+    'stack' => ['PHP', 'WordPress', 'MySQL', 'n8n', 'Make.com', 'OpenAI'],
+  ],
+  [
+    'role' => 'Agentic AI & Automation Specialist',
+    'company' => 'AIgents Solutions',
+    'location' => 'Malaysia (Remote)',
+    'period' => 'Apr 2025 – Present',
+    'type' => 'Part-Time',
+    'bullets' => [
+      'Deploy agentic workflows connecting AI APIs, webhooks, and no-code tools',
+      'Maintain WordPress/Elementor sites on AWS EC2 and automate manual processes',
+    ],
+    'stack' => ['n8n', 'Zapier', 'Make.com', 'OpenAI', 'Supabase', 'AWS'],
+  ],
+  [
+    'role' => 'Full-Stack Web Engineer',
+    'company' => 'JomSite Digital Services',
+    'location' => 'Perlis, Malaysia',
+    'period' => 'Feb 2024 – Present',
+    'type' => 'Part-Time',
+    'bullets' => [
+      'Ship React/Tailwind frontends with PHP and Node backends including payment APIs and LMS',
+      'Own DevOps on AWS (EC2, RDS, S3, IAM, VPC) with monitoring and incident response',
+    ],
+    'stack' => ['React', 'Node.js', 'PHP', 'WordPress', 'MongoDB', 'AWS'],
+  ],
+  [
+    'role' => 'Full-Stack Web Developer',
+    'company' => 'Upwork',
+    'location' => 'Remote (Freelance)',
+    'period' => 'Sep 2024 – Present',
+    'type' => 'Freelance',
+    'bullets' => [
+      'Run full project cycles for international clients: scope, estimate, build, deploy, handoff docs',
+    ],
+    'stack' => ['Full-Stack', 'Automation', 'Client Delivery'],
+  ],
+];
+
+// Projects
+$projects = [
+  ['name' => 'TableTap SaaS', 'desc' => 'Multi-tenant QR ordering platform with role-based dashboards (owner, cashier, waiter, kitchen), split bills, thermal receipts, 15+ SQL migrations, bilingual UI.', 'link' => $tabletap, 'icon' => '🍽️'],
+  ['name' => 'ChatLM Widget', 'desc' => 'Embeddable AI chat widget in Shadow DOM. BYOK or Managed AI via OpenRouter, Stripe billing, quota metering, CORS and API key hardening.', 'link' => $chatlm, 'icon' => '💬'],
+  ['name' => 'Agentic Content Publishing', 'desc' => 'n8n + DeepSeek pipeline publishing SEO posts to WordPress via REST API — unattended on VPS with retries and conditionals. ~80% faster publishing.', 'link' => null, 'icon' => '🤖'],
+  ['name' => 'CAAST Education LMS', 'desc' => 'WordPress + Tutor LMS with custom PHP plugins, student notes REST API, content developer dashboard, AI publishing wired through n8n.', 'link' => null, 'icon' => '📚'],
+  ['name' => 'AI Clinic Appointment Chatbot', 'desc' => 'WhatsApp booking bot with WAHA, GPT-4o, Google Calendar/Sheets integration, Telegram live-agent alerts, PDPA-aligned documentation.', 'link' => null, 'icon' => '🏥'],
+  ['name' => 'Company Dashboard', 'desc' => 'Business site with role-based dashboard using custom post types and ACF, PDF generation, WhatsApp API notifications, AWS deployment with CDN.', 'link' => null, 'icon' => '📊'],
+];
+
+// Skill groups
+$skillGroups = [
+  ['name' => 'Languages & Frontend', 'icon' => '💻', 'items' => ['JavaScript', 'TypeScript', 'PHP 8', 'Python', 'HTML5', 'CSS3', 'React.js', 'Next.js', 'Tailwind CSS', 'Bootstrap']],
+  ['name' => 'Backend & Database', 'icon' => '⚙️', 'items' => ['Node.js', 'Express.js', 'Laravel', 'REST API', 'GraphQL', 'MySQL', 'PostgreSQL', 'MongoDB', 'Redis']],
+  ['name' => 'CMS & E-commerce', 'icon' => '🛒', 'items' => ['WordPress', 'Shopify (Liquid)', 'Webflow', 'WooCommerce', 'ACF', 'Elementor', 'Tutor LMS']],
+  ['name' => 'AI & Automation', 'icon' => '🤖', 'items' => ['n8n', 'Make.com', 'Zapier', 'OpenAI API', 'Claude API', 'LangChain', 'RAG', 'Google Apps Script']],
+  ['name' => 'Cloud & DevOps', 'icon' => '☁️', 'items' => ['AWS (EC2, S3, RDS, Lambda)', 'Google Cloud', 'Microsoft Azure', 'Supabase', 'Docker', 'CI/CD', 'Git']],
+  ['name' => 'Tools & Collaboration', 'icon' => '🔧', 'items' => ['Stripe', 'GoHighLevel', 'HubSpot', 'Figma', 'Notion', 'Slack', 'Jira', 'Loom']],
+];
 ?>
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="<?= htmlspecialchars($pageDesc, ENT_QUOTES) ?>" />
-  <meta name="theme-color" content="#050a0d" />
-  <meta property="og:title" content="<?= htmlspecialchars($pageTitle, ENT_QUOTES) ?>" />
-  <meta property="og:description" content="<?= htmlspecialchars($pageDesc, ENT_QUOTES) ?>" />
-  <meta property="og:image" content="<?= htmlspecialchars($photo, ENT_QUOTES) ?>" />
-  <meta property="og:type" content="website" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="<?= htmlspecialchars($pageDesc, ENT_QUOTES) ?>">
+  <meta name="theme-color" content="#0a0f14">
+  <meta property="og:title" content="<?= htmlspecialchars($pageTitle, ENT_QUOTES) ?>">
+  <meta property="og:description" content="<?= htmlspecialchars($pageDesc, ENT_QUOTES) ?>">
+  <meta property="og:image" content="<?= htmlspecialchars($photo, ENT_QUOTES) ?>">
   <title><?= htmlspecialchars($pageTitle, ENT_QUOTES) ?></title>
-  <link rel="stylesheet" href="assets/css/styles.css" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E👨‍💻%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>👨‍💻</text></svg>">
 </head>
 <body>
   <!-- Background -->
-  <div class="bg-canvas" aria-hidden="true">
-    <div class="bg-mesh"></div>
+  <div class="bg-wrapper" aria-hidden="true">
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
   </div>
-  <div class="bg-grain" aria-hidden="true"></div>
-  
-  <!-- Custom cursor -->
-  <div class="cursor" id="cursor"></div>
 
   <!-- Navigation -->
   <header class="nav" id="nav">
-    <a class="brand" href="#top">Fikri<span>.</span></a>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="#about" data-i18n="nav.about">About</a>
-      <a href="#work" data-i18n="nav.work">Experience</a>
-      <a href="#projects" data-i18n="nav.projects">Projects</a>
-      <a href="#skills" data-i18n="nav.skills">Skills</a>
-      <a href="#contact" data-i18n="nav.contact">Contact</a>
+    <a class="nav-brand" href="#">Fikri<span>.</span></a>
+    <nav class="nav-menu">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#certs">Certifications</a>
+      <a href="#contact">Contact</a>
     </nav>
     <div class="nav-actions">
-      <div class="lang-wrap">
-        <button type="button" class="icon-btn" id="langToggle" aria-label="Language">
-          <span id="langLabel" style="font-size:0.8rem;font-weight:600;">EN</span>
+      <div class="lang-dropdown">
+        <button class="nav-btn" id="langBtn" aria-label="Change language">
+          <span id="langLabel">EN</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
         </button>
-        <div class="lang-menu" id="langMenu" role="menu">
-          <button type="button" data-lang="en" role="menuitem">English</button>
-          <button type="button" data-lang="id" role="menuitem">Indonesia</button>
-          <button type="button" data-lang="ja" role="menuitem">日本語</button>
-          <button type="button" data-lang="ar" role="menuitem">العربية</button>
-          <button type="button" data-lang="de" role="menuitem">Deutsch</button>
+        <div class="lang-menu" id="langMenu">
+          <button data-lang="en" class="active">🇬🇧 English</button>
+          <button data-lang="id">🇮🇩 Indonesia</button>
+          <button data-lang="ja">🇯🇵 日本語</button>
+          <button data-lang="ar">🇸🇦 العربية</button>
+          <button data-lang="de">🇩🇪 Deutsch</button>
         </div>
       </div>
-      <button type="button" class="icon-btn" id="themeToggle" aria-label="Toggle theme">
-        <svg id="themeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
-        </svg>
+      <button class="nav-btn" id="themeBtn" aria-label="Toggle theme">
+        <svg id="sunIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg id="moonIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
-      <button type="button" class="icon-btn menu-toggle" id="menuToggle" aria-label="Menu">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M4 7h16M4 12h16M4 17h16"/>
-        </svg>
+      <button class="nav-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
       </button>
     </div>
   </header>
 
-  <!-- Mobile menu -->
+  <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
-    <nav aria-label="Mobile">
-      <a href="#about" data-i18n="nav.about">About</a>
-      <a href="#work" data-i18n="nav.work">Experience</a>
-      <a href="#projects" data-i18n="nav.projects">Projects</a>
-      <a href="#skills" data-i18n="nav.skills">Skills</a>
-      <a href="#contact" data-i18n="nav.contact">Contact</a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#certs">Certifications</a>
+      <a href="#contact">Contact</a>
     </nav>
   </div>
 
-  <main id="top">
-    <!-- ========== BENTO HERO ========== -->
-    <section class="bento-hero wrap">
-      <div class="bento-grid">
-        <!-- Profile Card -->
-        <article class="cell-profile glass glass-glow profile-card reveal">
-          <div class="profile-photo">
-            <div class="profile-glow" aria-hidden="true"></div>
-            <img src="<?= htmlspecialchars($photo, ENT_QUOTES) ?>" width="1023" height="1537" alt="Muhamad Fikri Haikal" loading="eager" />
-          </div>
-          <div class="profile-info">
-            <h1 class="profile-name">Fikri <em>Haikal</em></h1>
-            <p class="profile-title" data-i18n="hero.title">Full-Stack Developer & AI Automation Engineer</p>
-            <div class="profile-tags">
-              <span class="tag"><span class="tag-dot"></span><span data-i18n="hero.tagOpen">Open to work</span></span>
-              <span class="tag" data-i18n="hero.tagRole">Growmodo · Senior Full-Stack</span>
-            </div>
-            <div class="profile-cta">
-              <a class="btn btn-primary" href="#work" data-i18n="hero.ctaPrimary">View experience</a>
-              <a class="btn btn-ghost" href="#contact" data-i18n="hero.ctaSecondary">Let's talk</a>
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-photo">
+            <div class="photo-glow"></div>
+            <img src="<?= htmlspecialchars($photo, ENT_QUOTES) ?>" alt="Muhamad Fikri Haikal" loading="eager">
+            <div class="photo-badge">
+              <span class="badge-dot"></span>
+              <span>Available for work</span>
             </div>
           </div>
-        </article>
-
-        <!-- Stats Card -->
-        <article class="cell-stats glass glass-glow stats-card reveal">
-          <div class="stat-item">
-            <div class="stat-number" data-i18n="stats.years">3+</div>
-            <div class="stat-label" data-i18n="stats.yearsLabel">Years Experience</div>
+          <div class="hero-text">
+            <p class="hero-greeting">Hi, I'm</p>
+            <h1 class="hero-name">Fikri <span>Haikal</span></h1>
+            <p class="hero-title">Full-Stack Developer & AI Automation Engineer</p>
+            <p class="hero-desc">I ship production web apps and agentic workflows for teams across Malaysia, the US, and Germany. Currently at <strong>Growmodo</strong> building agency-grade digital products.</p>
+            <div class="hero-stats">
+              <div class="stat">
+                <span class="stat-num">3+</span>
+                <span class="stat-label">Years Exp</span>
+              </div>
+              <div class="stat">
+                <span class="stat-num">2</span>
+                <span class="stat-label">Live SaaS</span>
+              </div>
+              <div class="stat">
+                <span class="stat-num">23</span>
+                <span class="stat-label">Certifications</span>
+              </div>
+              <div class="stat">
+                <span class="stat-num">3</span>
+                <span class="stat-label">Countries</span>
+              </div>
+            </div>
+            <div class="hero-cta">
+              <a href="#experience" class="btn btn-primary">
+                <span>View Experience</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+              </a>
+              <a href="#contact" class="btn btn-secondary">Let's Talk</a>
+              <a href="<?= htmlspecialchars($linkedin, ENT_QUOTES) ?>" target="_blank" class="btn btn-icon" aria-label="LinkedIn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </a>
+              <a href="<?= htmlspecialchars($github, ENT_QUOTES) ?>" target="_blank" class="btn btn-icon" aria-label="GitHub">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+            </div>
           </div>
-          <div class="stat-item">
-            <div class="stat-number" data-i18n="stats.saas">2</div>
-            <div class="stat-label" data-i18n="stats.saasLabel">Live SaaS Products</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number" data-i18n="stats.countries">3</div>
-            <div class="stat-label" data-i18n="stats.countriesLabel">Countries Served</div>
-          </div>
-        </article>
-
-        <!-- Clock Widget -->
-        <article class="cell-clock glass glass-glow clock-card reveal">
-          <div class="clock-time" id="clock">--:--</div>
-          <div class="clock-location">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-              <circle cx="12" cy="9" r="2.5"/>
-            </svg>
-            <span data-i18n="hero.location">Kuala Perlis, Malaysia</span>
-          </div>
-        </article>
-
+        </div>
+        
         <!-- Skills Marquee -->
-        <article class="cell-skills glass skills-card reveal">
-          <div class="marquee">
-            <div class="marquee-content">
-              <?php foreach($skills as $skill): ?>
-                <span class="skill-chip"><?= htmlspecialchars($skill, ENT_QUOTES) ?></span>
-              <?php endforeach; ?>
-            </div>
-            <div class="marquee-content" aria-hidden="true">
-              <?php foreach($skills as $skill): ?>
-                <span class="skill-chip"><?= htmlspecialchars($skill, ENT_QUOTES) ?></span>
-              <?php endforeach; ?>
-            </div>
+        <div class="skills-marquee">
+          <div class="marquee-track">
+            <?php foreach($skills as $skill): ?>
+              <span class="marquee-item"><?= htmlspecialchars($skill, ENT_QUOTES) ?></span>
+            <?php endforeach; ?>
+            <?php foreach($skills as $skill): ?>
+              <span class="marquee-item"><?= htmlspecialchars($skill, ENT_QUOTES) ?></span>
+            <?php endforeach; ?>
           </div>
-        </article>
-
-        <!-- SaaS: TableTap -->
-        <article class="cell-saas glass glass-glow saas-card reveal">
-          <div class="saas-header">
-            <div class="saas-icon">TT</div>
-            <div class="saas-title">TableTap</div>
-          </div>
-          <p class="saas-desc" data-i18n="saas.tabletap">Multi-tenant QR ordering SaaS for restaurants with role-based dashboards, split bills, and thermal receipts.</p>
-          <a class="saas-link" href="<?= htmlspecialchars($tabletap, ENT_QUOTES) ?>" target="_blank" rel="noopener">
-            <span data-i18n="saas.visit">Visit</span> tabletap.my →
-          </a>
-        </article>
-
-        <!-- Social Links -->
-        <article class="cell-social glass glass-glow social-card reveal">
-          <a class="social-link" href="<?= htmlspecialchars($linkedin, ENT_QUOTES) ?>" target="_blank" rel="noopener" aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5h4V23h-4V8.5zM8.5 8.5h3.8v2h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.6c0-1.57-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.5V23h-4V8.5z"/></svg>
-          </a>
-          <a class="social-link" href="<?= htmlspecialchars($github, ENT_QUOTES) ?>" target="_blank" rel="noopener" aria-label="GitHub">
-            <svg viewBox="0 0 24 24"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.1-.75.08-.74.08-.74 1.22.09 1.86 1.25 1.86 1.25 1.08 1.85 2.83 1.32 3.52 1.01.11-.78.42-1.32.76-1.62-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.62-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 24 12.5C24 5.87 18.63.5 12 .5z"/></svg>
-          </a>
-          <a class="social-link" href="mailto:<?= htmlspecialchars($email, ENT_QUOTES) ?>" aria-label="Email">
-            <svg viewBox="0 0 24 24"><path d="M2 4h20v16H2V4zm2 2v.5l8 5.5 8-5.5V6H4zm16 12V9.2l-8 5.5-8-5.5V18h16z"/></svg>
-          </a>
-        </article>
+        </div>
       </div>
     </section>
 
-    <!-- ========== ABOUT ========== -->
+    <!-- About Section -->
     <section class="section" id="about">
-      <div class="wrap">
-        <div class="section-header reveal">
-          <p class="section-eyebrow" data-i18n="about.eyebrow">About</p>
-          <h2 class="section-title" data-i18n="about.title">Builder. Automator. Product owner.</h2>
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">About</span>
+          <h2 class="section-title">Builder. Automator. Product Owner.</h2>
         </div>
-        <div class="glass glass-glow reveal" style="padding: clamp(24px, 4vw, 40px);">
-          <p style="font-size: 1.05rem; color: var(--c-text-dim); line-height: 1.8; margin-bottom: 16px;" data-i18n="about.p1">
-            Gedex Network Inc. trusted me with custom WordPress plugins, Elementor UI, and API integrations. That work grew into AI-powered automation pipelines with n8n and OpenAI — content that ships across platforms without babysitting.
-          </p>
-          <p style="font-size: 1.05rem; color: var(--c-text-dim); line-height: 1.8;" data-i18n="about.p2">
-            At Growmodo I deliver agency-grade sites on WordPress, Shopify, and Webflow, while running two live SaaS products solo. Certified across AWS, Azure AI, Google Cloud MLOps, Make.com, and Anthropic Claude.
-          </p>
+        <div class="about-content">
+          <div class="about-text">
+            <p>Gedex Network Inc. trusted me with custom WordPress plugins, Elementor UI, and API integrations. That work grew into <strong>AI-powered automation pipelines</strong> with n8n and OpenAI — content that ships across platforms without babysitting.</p>
+            <p>At <strong>Growmodo</strong> I deliver agency-grade sites on WordPress, Shopify, and Webflow, while running two live SaaS products solo. I've worked with clients and teams across <strong>Malaysia, the USA, and Germany</strong>.</p>
+            <p>Certified across <strong>AWS, Azure AI, Google Cloud MLOps, Make.com, and Anthropic Claude</strong>. I believe in building systems that run themselves and documenting everything for clean handoffs.</p>
+          </div>
+          <div class="about-cards">
+            <div class="about-card">
+              <div class="about-card-icon">📍</div>
+              <div class="about-card-content">
+                <span class="about-card-label">Location</span>
+                <span class="about-card-value">Kuala Perlis, Malaysia</span>
+              </div>
+            </div>
+            <div class="about-card">
+              <div class="about-card-icon">💼</div>
+              <div class="about-card-content">
+                <span class="about-card-label">Current Role</span>
+                <span class="about-card-value">Senior Full-Stack @ Growmodo</span>
+              </div>
+            </div>
+            <div class="about-card">
+              <div class="about-card-icon">🌐</div>
+              <div class="about-card-content">
+                <span class="about-card-label">Availability</span>
+                <span class="about-card-value">Remote, Hybrid, Relocation OK</span>
+              </div>
+            </div>
+            <div class="about-card">
+              <div class="about-card-icon">🗣️</div>
+              <div class="about-card-content">
+                <span class="about-card-label">Languages</span>
+                <span class="about-card-value">Malay, Indonesian, English, Arabic</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ========== EXPERIENCE ========== -->
-    <section class="section" id="work">
-      <div class="wrap">
-        <div class="section-header reveal">
-          <p class="section-eyebrow" data-i18n="work.eyebrow">Experience</p>
-          <h2 class="section-title" data-i18n="work.title">Where the work happens</h2>
-          <p class="section-lead" data-i18n="work.lead">Remote delivery across EU, US, and Malaysia time zones.</p>
+    <!-- Experience Timeline -->
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Experience</span>
+          <h2 class="section-title">Where the Work Happens</h2>
+          <p class="section-desc">Remote delivery across EU, US, and Malaysia time zones.</p>
         </div>
-        <div class="timeline" id="jobsMount"></div>
+        <div class="timeline">
+          <?php foreach($jobs as $i => $job): ?>
+          <div class="timeline-item" data-index="<?= $i ?>">
+            <div class="timeline-marker">
+              <div class="timeline-dot"></div>
+              <?php if($i < count($jobs) - 1): ?><div class="timeline-line"></div><?php endif; ?>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <div>
+                  <h3 class="timeline-role"><?= htmlspecialchars($job['role'], ENT_QUOTES) ?></h3>
+                  <p class="timeline-company"><?= htmlspecialchars($job['company'], ENT_QUOTES) ?></p>
+                  <p class="timeline-location"><?= htmlspecialchars($job['location'], ENT_QUOTES) ?></p>
+                </div>
+                <div class="timeline-meta">
+                  <span class="timeline-period"><?= htmlspecialchars($job['period'], ENT_QUOTES) ?></span>
+                  <span class="timeline-type"><?= htmlspecialchars($job['type'], ENT_QUOTES) ?></span>
+                </div>
+              </div>
+              <ul class="timeline-bullets">
+                <?php foreach($job['bullets'] as $bullet): ?>
+                <li><?= htmlspecialchars($bullet, ENT_QUOTES) ?></li>
+                <?php endforeach; ?>
+              </ul>
+              <div class="timeline-stack">
+                <?php foreach($job['stack'] as $tech): ?>
+                <span class="tech-tag"><?= htmlspecialchars($tech, ENT_QUOTES) ?></span>
+                <?php endforeach; ?>
+              </div>
+            </div>
+          </div>
+          <?php endforeach; ?>
+        </div>
       </div>
     </section>
 
-    <!-- ========== PROJECTS ========== -->
+    <!-- Projects Section -->
     <section class="section" id="projects">
-      <div class="wrap">
-        <div class="section-header reveal">
-          <p class="section-eyebrow" data-i18n="projects.eyebrow">Selected work</p>
-          <h2 class="section-title" data-i18n="projects.title">Client systems that stay running</h2>
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Projects</span>
+          <h2 class="section-title">Things I've Built</h2>
+          <p class="section-desc">From SaaS products to AI automation systems.</p>
         </div>
-        <div class="projects-grid" id="projectsMount"></div>
+        <div class="projects-grid">
+          <?php foreach($projects as $project): ?>
+          <article class="project-card">
+            <div class="project-icon"><?= $project['icon'] ?></div>
+            <h3 class="project-name"><?= htmlspecialchars($project['name'], ENT_QUOTES) ?></h3>
+            <p class="project-desc"><?= htmlspecialchars($project['desc'], ENT_QUOTES) ?></p>
+            <?php if($project['link']): ?>
+            <a href="<?= htmlspecialchars($project['link'], ENT_QUOTES) ?>" target="_blank" class="project-link">
+              <span>Visit Site</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </a>
+            <?php endif; ?>
+          </article>
+          <?php endforeach; ?>
+        </div>
       </div>
     </section>
 
-    <!-- ========== SKILLS ========== -->
+    <!-- Skills Section -->
     <section class="section" id="skills">
-      <div class="wrap">
-        <div class="section-header reveal">
-          <p class="section-eyebrow" data-i18n="skills.eyebrow">Toolkit</p>
-          <h2 class="section-title" data-i18n="skills.title">What I reach for daily</h2>
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Skills</span>
+          <h2 class="section-title">My Toolkit</h2>
+          <p class="section-desc">Technologies and tools I use daily.</p>
         </div>
-        <div class="skills-grid" id="skillsMount"></div>
+        <div class="skills-grid">
+          <?php foreach($skillGroups as $group): ?>
+          <div class="skill-category">
+            <div class="skill-category-header">
+              <span class="skill-icon"><?= $group['icon'] ?></span>
+              <h3 class="skill-category-name"><?= htmlspecialchars($group['name'], ENT_QUOTES) ?></h3>
+            </div>
+            <div class="skill-tags">
+              <?php foreach($group['items'] as $item): ?>
+              <span class="skill-tag"><?= htmlspecialchars($item, ENT_QUOTES) ?></span>
+              <?php endforeach; ?>
+            </div>
+          </div>
+          <?php endforeach; ?>
+        </div>
       </div>
     </section>
 
-    <!-- ========== CERTIFICATIONS ========== -->
+    <!-- Certifications Section -->
     <section class="section" id="certs">
-      <div class="wrap">
-        <div class="section-header reveal">
-          <p class="section-eyebrow" data-i18n="certs.eyebrow">Credentials</p>
-          <h2 class="section-title" data-i18n="certs.title">Selected certifications</h2>
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Certifications</span>
+          <h2 class="section-title">23 Verified Credentials</h2>
+          <p class="section-desc">Continuous learning across cloud, AI, and web development.</p>
         </div>
-        <div class="certs-grid" id="certsMount"></div>
+        <div class="certs-grid">
+          <?php foreach($certs as $cert): ?>
+          <div class="cert-card">
+            <div class="cert-badge"></div>
+            <div class="cert-content">
+              <h4 class="cert-name"><?= htmlspecialchars($cert['name'], ENT_QUOTES) ?></h4>
+              <p class="cert-issuer"><?= htmlspecialchars($cert['issuer'], ENT_QUOTES) ?></p>
+              <p class="cert-date"><?= htmlspecialchars($cert['date'], ENT_QUOTES) ?></p>
+            </div>
+          </div>
+          <?php endforeach; ?>
+        </div>
       </div>
     </section>
 
-    <!-- ========== CONTACT ========== -->
+    <!-- Contact Section -->
     <section class="section" id="contact">
-      <div class="wrap">
-        <div class="section-header reveal">
-          <p class="section-eyebrow" data-i18n="contact.eyebrow">Contact</p>
-          <h2 class="section-title" data-i18n="contact.title">Tell me what you're building</h2>
-          <p class="section-lead" data-i18n="contact.lead">Remote-ready with US and EU time zone overlap. Open to hybrid and relocation.</p>
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Contact</span>
+          <h2 class="section-title">Let's Build Something Together</h2>
+          <p class="section-desc">Have a project, role, or idea? I'd love to hear about it.</p>
         </div>
         <div class="contact-grid">
-          <aside class="contact-info glass glass-glow reveal">
-            <h3 data-i18n="contact.directTitle">Direct lines</h3>
-            <p data-i18n="contact.directLead">Prefer email or LinkedIn for hiring conversations.</p>
-            <div class="contact-links">
-              <a class="contact-link-item" href="mailto:<?= htmlspecialchars($email, ENT_QUOTES) ?>">
-                <small data-i18n="contact.email">Email</small>
-                <span><?= htmlspecialchars($email, ENT_QUOTES) ?></span>
-              </a>
-              <a class="contact-link-item" href="tel:<?= htmlspecialchars($phoneHref, ENT_QUOTES) ?>">
-                <small data-i18n="contact.phone">Phone</small>
-                <span><?= htmlspecialchars($phone, ENT_QUOTES) ?></span>
-              </a>
-              <span class="contact-link-item">
-                <small data-i18n="contact.location">Location</small>
-                <span data-i18n="contact.locationVal">Kuala Perlis, Perlis, Malaysia</span>
-              </span>
+          <div class="contact-info">
+            <a href="mailto:<?= htmlspecialchars($email, ENT_QUOTES) ?>" class="contact-card">
+              <div class="contact-icon">📧</div>
+              <div>
+                <span class="contact-label">Email</span>
+                <span class="contact-value"><?= htmlspecialchars($email, ENT_QUOTES) ?></span>
+              </div>
+            </a>
+            <a href="tel:<?= htmlspecialchars($phoneHref, ENT_QUOTES) ?>" class="contact-card">
+              <div class="contact-icon">📱</div>
+              <div>
+                <span class="contact-label">Phone / WhatsApp</span>
+                <span class="contact-value"><?= htmlspecialchars($phone, ENT_QUOTES) ?></span>
+              </div>
+            </a>
+            <a href="<?= htmlspecialchars($linkedin, ENT_QUOTES) ?>" target="_blank" class="contact-card">
+              <div class="contact-icon">💼</div>
+              <div>
+                <span class="contact-label">LinkedIn</span>
+                <span class="contact-value">muhamad-fikri-haikal</span>
+              </div>
+            </a>
+            <div class="contact-card">
+              <div class="contact-icon">📍</div>
+              <div>
+                <span class="contact-label">Location</span>
+                <span class="contact-value">Kuala Perlis, Perlis, Malaysia</span>
+              </div>
             </div>
-          </aside>
-
-          <form class="contact-form-wrap glass glass-glow reveal" id="contactForm" novalidate>
+          </div>
+          <form class="contact-form" id="contactForm">
             <div class="form-row">
-              <label>
-                <span data-i18n="contact.name">Name</span>
-                <input type="text" name="name" required autocomplete="name" placeholder="Your name" data-i18n-placeholder="contact.namePh" />
-              </label>
-              <label>
-                <span data-i18n="contact.emailLabel">Email</span>
-                <input type="email" name="email" required autocomplete="email" placeholder="you@company.com" data-i18n-placeholder="contact.emailPh" />
-              </label>
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="you@company.com" required>
+              </div>
             </div>
-            <label>
-              <span data-i18n="contact.message">Message</span>
-              <textarea name="message" required placeholder="Project, role, or idea…" data-i18n-placeholder="contact.messagePh"></textarea>
-            </label>
-            <label class="sr-only" aria-hidden="true">Website
-              <input type="text" name="website" tabindex="-1" autocomplete="off" />
-            </label>
-            <button type="submit" class="btn btn-primary" data-i18n="contact.send">Send message</button>
-            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" placeholder="Tell me about your project, role, or idea..." required></textarea>
+            </div>
+            <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
+            <button type="submit" class="btn btn-primary btn-full">
+              <span>Send Message</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            </button>
+            <p class="form-status" id="formStatus"></p>
           </form>
         </div>
       </div>
@@ -297,24 +496,25 @@ $skills = ['JavaScript', 'TypeScript', 'PHP 8', 'Python', 'React', 'Next.js', 'N
   </main>
 
   <!-- Footer -->
-  <footer class="footer wrap">
-    <div class="footer-inner glass">
-      <p data-i18n="footer.copy">© 2026 Muhamad Fikri Haikal. Built with HTML, CSS, JS & PHP.</p>
-      <div class="footer-socials">
-        <a href="<?= htmlspecialchars($linkedin, ENT_QUOTES) ?>" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5h4V23h-4V8.5zM8.5 8.5h3.8v2h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.6c0-1.57-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.5V23h-4V8.5z"/></svg>
-        </a>
-        <a href="<?= htmlspecialchars($github, ENT_QUOTES) ?>" target="_blank" rel="noopener" aria-label="GitHub">
-          <svg viewBox="0 0 24 24"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.1-.75.08-.74.08-.74 1.22.09 1.86 1.25 1.86 1.25 1.08 1.85 2.83 1.32 3.52 1.01.11-.78.42-1.32.76-1.62-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.62-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 24 12.5C24 5.87 18.63.5 12 .5z"/></svg>
-        </a>
-        <a href="mailto:<?= htmlspecialchars($email, ENT_QUOTES) ?>" aria-label="Email">
-          <svg viewBox="0 0 24 24"><path d="M2 4h20v16H2V4zm2 2v.5l8 5.5 8-5.5V6H4zm16 12V9.2l-8 5.5-8-5.5V18h16z"/></svg>
-        </a>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p>© 2026 Muhamad Fikri Haikal. Built with HTML, CSS, JS & PHP.</p>
+        <div class="footer-links">
+          <a href="<?= htmlspecialchars($linkedin, ENT_QUOTES) ?>" target="_blank" aria-label="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="<?= htmlspecialchars($github, ENT_QUOTES) ?>" target="_blank" aria-label="GitHub">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
+          <a href="mailto:<?= htmlspecialchars($email, ENT_QUOTES) ?>" aria-label="Email">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+        </div>
       </div>
     </div>
   </footer>
 
-  <script src="assets/js/i18n.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>

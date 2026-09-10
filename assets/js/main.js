@@ -504,12 +504,18 @@
       submit.disabled = true;
       submitLabel.textContent = t("contact.sending");
 
-      fetch(form.action, { method: "POST", body: new FormData(form) })
+      fetch(form.getAttribute("action") || "api/contact.php", {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      })
         .then(function (res) {
-          return res.json();
+          return res.json().then(function (json) {
+            return { okHttp: res.ok, json: json };
+          });
         })
-        .then(function (json) {
-          if (!json || !json.ok) throw new Error("rejected");
+        .then(function (result) {
+          if (!result.json || !result.json.ok) throw new Error("rejected");
           note.textContent = t("contact.ok");
           note.className = "form__note is-ok";
           form.reset();

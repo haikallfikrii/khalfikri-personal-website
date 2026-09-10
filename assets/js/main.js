@@ -504,9 +504,22 @@
       submit.disabled = true;
       submitLabel.textContent = t("contact.sending");
 
-      fetch(form.getAttribute("action") || "api/contact.php", {
+      var data = new FormData(form);
+      var onGithubPages = /\.github\.io$/i.test(location.hostname);
+      var endpoint = onGithubPages
+        ? "https://formsubmit.co/ajax/muhamadfikrih29@gmail.com"
+        : form.getAttribute("action") || "api/contact.php";
+
+      if (onGithubPages) {
+        data.set("_subject", "Portfolio contact from " + (data.get("name") || "visitor"));
+        data.set("_template", "table");
+        data.set("_captcha", "false");
+        data.delete("website");
+      }
+
+      fetch(endpoint, {
         method: "POST",
-        body: new FormData(form),
+        body: data,
         headers: { Accept: "application/json" },
       })
         .then(function (res) {
@@ -515,7 +528,11 @@
           });
         })
         .then(function (result) {
-          if (!result.json || !result.json.ok) throw new Error("rejected");
+          var json = result.json || {};
+          var ok = onGithubPages
+            ? !!(json.success === true || json.success === "true" || result.okHttp)
+            : !!(json.ok);
+          if (!ok) throw new Error("rejected");
           note.textContent = t("contact.ok");
           note.className = "form__note is-ok";
           form.reset();

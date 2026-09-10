@@ -17,3 +17,6 @@ storage/*
 # Dependencies (if added later)
 node_modules/
 vendor/
+
+# Local GitHub Pages export
+.pages-build/

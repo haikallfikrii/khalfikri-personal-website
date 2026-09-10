@@ -1,291 +1,274 @@
-(() => {
-  const STORAGE_THEME = "fh-theme";
-  const STORAGE_LANG = "fh-lang";
-  const I18N = window.PORTFOLIO_I18N;
-  const root = document.documentElement;
-  const body = document.body;
+// ============================================================
+// Fikri Haikal Portfolio - Interactive JavaScript
+// ============================================================
 
-  /* ============ THEME ============ */
-  const sunIcon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>`;
-  const moonIcon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>`;
+(function() {
+  'use strict';
 
-  function getPreferredTheme() {
-    const saved = localStorage.getItem(STORAGE_THEME);
-    if (saved === "light" || saved === "dark") return saved;
-    return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+  // ============ THEME TOGGLE ============
+  const themeBtn = document.getElementById('themeBtn');
+  const sunIcon = document.getElementById('sunIcon');
+  const moonIcon = document.getElementById('moonIcon');
+
+  function getTheme() {
+    const saved = localStorage.getItem('fh-theme');
+    if (saved) return saved;
+    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
   }
 
   function setTheme(theme) {
-    root.setAttribute("data-theme", theme);
-    localStorage.setItem(STORAGE_THEME, theme);
-    const btn = document.getElementById("themeToggle");
-    if (btn) btn.innerHTML = theme === "dark" ? sunIcon : moonIcon;
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('fh-theme', theme);
+    if (sunIcon && moonIcon) {
+      sunIcon.style.display = theme === 'dark' ? 'block' : 'none';
+      moonIcon.style.display = theme === 'light' ? 'block' : 'none';
+    }
   }
 
-  setTheme(getPreferredTheme());
-  document.getElementById("themeToggle")?.addEventListener("click", () => {
-    setTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark");
+  setTheme(getTheme());
+
+  themeBtn?.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    setTheme(current === 'dark' ? 'light' : 'dark');
   });
 
-  /* ============ LANGUAGE ============ */
-  function getLang() {
-    const saved = localStorage.getItem(STORAGE_LANG);
-    if (saved && I18N && I18N[saved]) return saved;
-    const nav = (navigator.language || "en").slice(0, 2).toLowerCase();
-    if (I18N && I18N[nav]) return nav;
-    return "en";
-  }
+  // ============ LANGUAGE DROPDOWN ============
+  const langBtn = document.getElementById('langBtn');
+  const langMenu = document.getElementById('langMenu');
+  const langLabel = document.getElementById('langLabel');
 
-  function applyLang(lang) {
-    const t = I18N?.[lang];
-    if (!t) return;
-    localStorage.setItem(STORAGE_LANG, lang);
-    root.lang = lang;
-    root.dir = t.dir || "ltr";
-    body.classList.toggle("rtl", t.dir === "rtl");
-
-    document.querySelectorAll("[data-i18n]").forEach((el) => {
-      const path = el.getAttribute("data-i18n");
-      const value = path.split(".").reduce((o, k) => (o ? o[k] : null), t);
-      if (typeof value === "string") el.textContent = value;
-    });
-
-    document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
-      const path = el.getAttribute("data-i18n-placeholder");
-      const value = path.split(".").reduce((o, k) => (o ? o[k] : null), t);
-      if (typeof value === "string") el.setAttribute("placeholder", value);
-    });
-
-    renderJobs(t);
-    renderProjects(t);
-    renderSkills(t);
-    renderCerts(t);
-
-    document.querySelectorAll(".lang-menu button").forEach((btn) => {
-      btn.classList.toggle("active", btn.dataset.lang === lang);
-    });
-
-    const label = document.getElementById("langLabel");
-    if (label) label.textContent = lang.toUpperCase();
-  }
-
-  function esc(str) {
-    return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-  }
-
-  function renderJobs(t) {
-    const mount = document.getElementById("jobsMount");
-    if (!mount || !t.work?.jobs) return;
-    mount.innerHTML = t.work.jobs.map((job) => `
-      <article class="job-card glass glass-glow reveal">
-        <div class="job-header">
-          <div>
-            <div class="job-role">${esc(job.role)}</div>
-            <div class="job-company">${esc(job.company)}</div>
-          </div>
-          <div class="job-when">${esc(job.when)}</div>
-        </div>
-        <ul class="job-bullets">${job.bullets.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>
-        <div class="stack-row">${job.stack.map((s) => `<span class="stack-pill">${esc(s)}</span>`).join("")}</div>
-      </article>
-    `).join("");
-    observeReveals();
-  }
-
-  function renderProjects(t) {
-    const mount = document.getElementById("projectsMount");
-    if (!mount || !t.projects?.items) return;
-    mount.innerHTML = t.projects.items.map((p) => `
-      <article class="project-card glass glass-glow reveal">
-        <h3>${esc(p.name)}</h3>
-        <p>${esc(p.desc)}</p>
-      </article>
-    `).join("");
-    observeReveals();
-  }
-
-  function renderSkills(t) {
-    const mount = document.getElementById("skillsMount");
-    if (!mount || !t.skills?.groups) return;
-    mount.innerHTML = t.skills.groups.map((g) => `
-      <article class="skill-block glass reveal">
-        <h3>${esc(g.name)}</h3>
-        <div class="stack-row">${g.items.map((i) => `<span class="stack-pill">${esc(i)}</span>`).join("")}</div>
-      </article>
-    `).join("");
-    observeReveals();
-  }
-
-  function renderCerts(t) {
-    const mount = document.getElementById("certsMount");
-    if (!mount || !t.certs?.items) return;
-    mount.innerHTML = t.certs.items.map((c) => `
-      <article class="cert-item glass reveal">
-        <span class="cert-dot"></span>
-        <div class="cert-info">
-          <h3>${esc(c.name)}</h3>
-          <p>${esc(c.meta)}</p>
-        </div>
-      </article>
-    `).join("");
-    observeReveals();
-  }
-
-  if (I18N) applyLang(getLang());
-
-  // Language dropdown
-  const langBtn = document.getElementById("langToggle");
-  const langMenu = document.getElementById("langMenu");
-  langBtn?.addEventListener("click", (e) => {
+  langBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
-    langMenu?.classList.toggle("open");
+    langMenu?.classList.toggle('open');
   });
-  langMenu?.querySelectorAll("button").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      applyLang(btn.dataset.lang);
-      langMenu.classList.remove("open");
+
+  document.addEventListener('click', () => {
+    langMenu?.classList.remove('open');
+  });
+
+  langMenu?.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.dataset.lang;
+      localStorage.setItem('fh-lang', lang);
+      if (langLabel) langLabel.textContent = lang.toUpperCase();
+      
+      // Update active state
+      langMenu.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      // Update body direction for RTL
+      document.body.classList.toggle('rtl', lang === 'ar');
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      
+      langMenu.classList.remove('open');
     });
   });
-  document.addEventListener("click", () => langMenu?.classList.remove("open"));
 
-  /* ============ MOBILE MENU ============ */
-  const mobile = document.getElementById("mobileMenu");
-  document.getElementById("menuToggle")?.addEventListener("click", () => {
-    mobile?.classList.toggle("open");
+  // Load saved language
+  const savedLang = localStorage.getItem('fh-lang') || 'en';
+  if (langLabel) langLabel.textContent = savedLang.toUpperCase();
+  langMenu?.querySelectorAll('button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === savedLang);
   });
-  mobile?.querySelectorAll("a").forEach((a) =>
-    a.addEventListener("click", () => mobile.classList.remove("open"))
-  );
+  document.body.classList.toggle('rtl', savedLang === 'ar');
+  document.documentElement.lang = savedLang;
+  document.documentElement.dir = savedLang === 'ar' ? 'rtl' : 'ltr';
 
-  /* ============ ACTIVE NAV LINK ============ */
-  const sections = [...document.querySelectorAll("section[id]")];
-  const navLinks = [...document.querySelectorAll(".nav-links a")];
-  if (sections.length && navLinks.length) {
-    const ioNav = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            navLinks.forEach((l) => l.classList.toggle("active", l.getAttribute("href") === `#${entry.target.id}`));
+  // ============ MOBILE MENU ============
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  mobileMenuBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('open');
+  });
+
+  mobileMenu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+    });
+  });
+
+  // ============ ACTIVE NAV LINK ============
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-menu a');
+
+  function setActiveNav() {
+    const scrollPos = window.scrollY + 150;
+    
+    sections.forEach(section => {
+      const top = section.offsetTop;
+      const height = section.offsetHeight;
+      const id = section.getAttribute('id');
+      
+      if (scrollPos >= top && scrollPos < top + height) {
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${id}`) {
+            link.classList.add('active');
           }
         });
-      },
-      { rootMargin: "-40% 0px -50% 0px" }
-    );
-    sections.forEach((s) => ioNav.observe(s));
-  }
-
-  /* ============ CLOCK ============ */
-  const clockEl = document.getElementById("clock");
-  function updateClock() {
-    if (!clockEl) return;
-    const now = new Date().toLocaleTimeString("en-MY", {
-      timeZone: "Asia/Kuala_Lumpur",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: false,
-    });
-    clockEl.textContent = now;
-  }
-  updateClock();
-  setInterval(updateClock, 1000);
-
-  /* ============ REVEAL ANIMATION ============ */
-  let revealIO;
-
-  function revealVisible() {
-    document.querySelectorAll(".reveal:not(.in)").forEach((el) => {
-      const r = el.getBoundingClientRect();
-      if (r.top < window.innerHeight + 60 && r.bottom > -60) {
-        el.classList.add("in");
       }
     });
   }
 
-  function observeReveals() {
-    if (revealIO) revealIO.disconnect();
+  window.addEventListener('scroll', setActiveNav, { passive: true });
+  setActiveNav();
 
-    // Immediate reveal for above-the-fold
-    revealVisible();
-    document.querySelectorAll(".reveal").forEach((el) => {
-      if (!el.classList.contains("in")) {
-        const r = el.getBoundingClientRect();
-        if (r.top < window.innerHeight) el.classList.add("in");
+  // ============ SMOOTH SCROLL ============
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const targetId = link.getAttribute('href');
+      if (targetId === '#') return;
+      
+      const target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
       }
     });
+  });
 
-    // Enable CSS animation
-    root.classList.add("js-ready");
+  // ============ CONTACT FORM ============
+  const contactForm = document.getElementById('contactForm');
+  const formStatus = document.getElementById('formStatus');
 
-    revealIO = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("in");
-            revealIO.unobserve(e.target);
-          }
-        });
-      },
-      { threshold: 0.05, rootMargin: "60px 0px 60px 0px" }
-    );
-    document.querySelectorAll(".reveal:not(.in)").forEach((el) => revealIO.observe(el));
-
-    // Fallback
-    setTimeout(revealVisible, 150);
-    setTimeout(() => {
-      document.querySelectorAll(".reveal:not(.in)").forEach((el) => el.classList.add("in"));
-    }, 1000);
-  }
-  observeReveals();
-
-  /* ============ CUSTOM CURSOR ============ */
-  const cursor = document.getElementById("cursor");
-  if (cursor && window.matchMedia("(pointer: fine)").matches) {
-    body.classList.add("has-cursor");
-    let cursorX = 0, cursorY = 0, targetX = 0, targetY = 0;
-
-    window.addEventListener("pointermove", (e) => {
-      targetX = e.clientX;
-      targetY = e.clientY;
-    }, { passive: true });
-
-    function animateCursor() {
-      cursorX += (targetX - cursorX) * 0.15;
-      cursorY += (targetY - cursorY) * 0.15;
-      cursor.style.left = `${cursorX}px`;
-      cursor.style.top = `${cursorY}px`;
-      requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-
-    // Hover states
-    const interactives = document.querySelectorAll("a, button, .glass-glow");
-    interactives.forEach((el) => {
-      el.addEventListener("mouseenter", () => cursor.classList.add("hover"));
-      el.addEventListener("mouseleave", () => cursor.classList.remove("hover"));
-    });
-  }
-
-  /* ============ CONTACT FORM ============ */
-  const form = document.getElementById("contactForm");
-  const status = document.getElementById("formStatus");
-  form?.addEventListener("submit", async (e) => {
+  contactForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const lang = localStorage.getItem(STORAGE_LANG) || "en";
-    const t = I18N?.[lang]?.contact;
-    status.textContent = "";
-    status.classList.remove("error");
+    
+    if (formStatus) {
+      formStatus.textContent = 'Sending...';
+      formStatus.className = 'form-status';
+    }
 
-    const data = new FormData(form);
+    const formData = new FormData(contactForm);
+
     try {
-      const res = await fetch("api/contact.php", { method: "POST", body: data });
-      const json = await res.json();
-      if (!res.ok || !json.ok) throw new Error(json.message || "fail");
-      status.textContent = t?.success || "Thanks! I'll reply soon.";
-      form.reset();
-    } catch {
-      status.textContent = t?.error || "Something went wrong. Email me directly.";
-      status.classList.add("error");
+      const response = await fetch('api/contact.php', {
+        method: 'POST',
+        body: formData
+      });
+      
+      const result = await response.json();
+      
+      if (result.ok) {
+        if (formStatus) {
+          formStatus.textContent = 'Message sent! I\'ll reply soon.';
+          formStatus.className = 'form-status success';
+        }
+        contactForm.reset();
+      } else {
+        throw new Error(result.message || 'Failed to send');
+      }
+    } catch (error) {
+      if (formStatus) {
+        formStatus.textContent = 'Something went wrong. Please email me directly.';
+        formStatus.className = 'form-status error';
+      }
     }
   });
+
+  // ============ INTERSECTION OBSERVER FOR ANIMATIONS ============
+  if ('IntersectionObserver' in window) {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.timeline-item, .project-card, .skill-category, .cert-card').forEach(el => {
+      el.style.animationPlayState = 'paused';
+      observer.observe(el);
+    });
+  }
+
+  // ============ PHOTO TILT EFFECT ============
+  const heroPhoto = document.querySelector('.hero-photo');
+  
+  if (heroPhoto && window.matchMedia('(pointer: fine)').matches) {
+    heroPhoto.addEventListener('mousemove', (e) => {
+      const rect = heroPhoto.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      
+      const img = heroPhoto.querySelector('img');
+      if (img) {
+        img.style.transform = `perspective(500px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) scale(1.03)`;
+      }
+    });
+
+    heroPhoto.addEventListener('mouseleave', () => {
+      const img = heroPhoto.querySelector('img');
+      if (img) {
+        img.style.transform = '';
+      }
+    });
+  }
+
+  // ============ TIMELINE HOVER EFFECT ============
+  document.querySelectorAll('.timeline-item').forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      const dot = item.querySelector('.timeline-dot');
+      if (dot) {
+        dot.style.transform = 'scale(1.5)';
+        dot.style.boxShadow = '0 0 20px var(--accent)';
+      }
+    });
+    
+    item.addEventListener('mouseleave', () => {
+      const dot = item.querySelector('.timeline-dot');
+      if (dot) {
+        dot.style.transform = '';
+        dot.style.boxShadow = '';
+      }
+    });
+  });
+
+  // ============ SKILL TAG RANDOMIZE COLOR ON HOVER ============
+  document.querySelectorAll('.skill-tag').forEach(tag => {
+    tag.addEventListener('mouseenter', () => {
+      const hue = Math.random() * 60 + 20; // 20-80 range for warm colors
+      tag.style.borderColor = `hsl(${hue}, 80%, 50%)`;
+      tag.style.backgroundColor = `hsla(${hue}, 80%, 50%, 0.1)`;
+      tag.style.color = `hsl(${hue}, 80%, 50%)`;
+    });
+    
+    tag.addEventListener('mouseleave', () => {
+      tag.style.borderColor = '';
+      tag.style.backgroundColor = '';
+      tag.style.color = '';
+    });
+  });
+
+  // ============ TYPED EFFECT FOR HERO ============
+  const heroTitle = document.querySelector('.hero-title');
+  if (heroTitle) {
+    const originalText = heroTitle.textContent;
+    const titles = [
+      'Full-Stack Developer & AI Automation Engineer',
+      'Building SaaS Products & Automation Systems',
+      'WordPress • MERN • n8n • Make.com',
+      'Open to Remote Opportunities'
+    ];
+    let titleIndex = 0;
+    
+    setInterval(() => {
+      titleIndex = (titleIndex + 1) % titles.length;
+      heroTitle.style.opacity = '0';
+      setTimeout(() => {
+        heroTitle.textContent = titles[titleIndex];
+        heroTitle.style.opacity = '1';
+      }, 300);
+    }, 4000);
+  }
+
+  console.log('🚀 Portfolio loaded successfully!');
 })();

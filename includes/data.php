@@ -97,9 +97,15 @@ const FH_JOBS = [
 const FH_PROJECTS = [
   ['slug' => 'tabletap', 'name' => 'TableTap SaaS', 'link' => 'https://tabletap.my', 'icon' => 'restaurant', 'tags' => ['Multi-tenant', 'PHP 8', 'MySQL', 'Stripe']],
   ['slug' => 'chatlm', 'name' => 'ChatLM Widget', 'link' => 'https://chatlm.tech', 'icon' => 'chat', 'tags' => ['Shadow DOM', 'OpenRouter', 'Stripe', 'BYOK']],
+  ['slug' => 'sasak', 'name' => 'Sasak Explorer', 'link' => 'https://sasakexplorer.com/', 'icon' => 'map', 'tags' => ['WordPress', 'WP Travel Engine', 'Elementor', 'Booking']],
   ['slug' => 'agentic', 'name' => 'Agentic Content Publishing', 'link' => null, 'icon' => 'workflow', 'tags' => ['n8n', 'DeepSeek', 'WP REST', 'VPS']],
   ['slug' => 'caast', 'name' => 'CAAST Education LMS', 'link' => null, 'icon' => 'book', 'tags' => ['Tutor LMS', 'Custom plugin', 'REST API']],
   ['slug' => 'clinic', 'name' => 'AI Clinic Appointment Bot', 'link' => null, 'icon' => 'heartbeat', 'tags' => ['WAHA', 'GPT-4o', 'Calendar API', 'PDPA']],
+  ['slug' => 'jomsite-shop', 'name' => 'JomSite E-Commerce', 'link' => 'https://shop.jomsite.com/', 'icon' => 'cart', 'tags' => ['E-commerce', 'Payments', 'WordPress', 'Checkout']],
+  ['slug' => 'magenta', 'name' => 'Magenta Online Courses', 'link' => 'https://magenta.jomsite.com/', 'icon' => 'book', 'tags' => ['React', 'Firebase', 'Courses', 'LMS']],
+  ['slug' => 'voting', 'name' => 'PPI KUIPs Online Voting', 'link' => null, 'icon' => 'ballot', 'tags' => ['PHP', 'Elections', 'Auth', 'Audit trail']],
+  ['slug' => 'mlbb', 'name' => 'MLBB Sport Week Platform', 'link' => 'https://mlbb-competition.vercel.app/', 'icon' => 'gamepad', 'tags' => ['React', 'Tailwind', 'Events', 'Draft pick']],
+  ['slug' => 'cafe', 'name' => 'Local Café Website', 'link' => 'https://dev-belajarwppertama.pantheonsite.io/', 'icon' => 'coffee', 'tags' => ['WordPress', 'Elementor', 'Local business']],
   ['slug' => 'dashboard', 'name' => 'Role-Based Company Dashboard', 'link' => null, 'icon' => 'dashboard', 'tags' => ['ACF', 'PDF', 'WhatsApp API', 'CDN']],
 ];
 

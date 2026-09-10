@@ -1,0 +1,19 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Local contact form logs
+storage/*
+!storage/.gitignore
+
+# Env / secrets
+.env
+.env.*
+*.log
+
+# Dependencies (if added later)
+node_modules/
+vendor/

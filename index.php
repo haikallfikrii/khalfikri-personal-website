@@ -65,7 +65,7 @@ $certsJs = array_map(static function (array $c): array {
   ];
 }, FH_CERTS);
 
-$assetV = '20260911b';
+$assetV = '20260911c';
 $jsonFlags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
 ?>
 <!DOCTYPE html>
@@ -528,14 +528,16 @@ $jsonFlags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
         <span class="lg-hl"></span>
         <span class="cert__art">
           <?= $cert['art'] ?>
-          <?php if (!empty($cert['logo'])): ?>
-          <img class="cert__logo" src="<?= e($cert['logo']) ?>" alt="" width="36" height="36" loading="lazy" decoding="async">
-          <?php endif; ?>
           <span class="cert__zoom"><span><?= fh_icon('zoom', 20) ?></span></span>
         </span>
         <span class="cert__body lg-in">
           <span class="cert__name"><?= e($cert['name']) ?></span>
-          <span class="cert__issuer"><?= e($cert['issuer']) ?></span>
+          <span class="cert__issuer-row">
+            <?php if (!empty($cert['logo'])): ?>
+            <img class="cert__logo" src="<?= e($cert['logo']) ?>" alt="" width="22" height="22" loading="lazy" decoding="async">
+            <?php endif; ?>
+            <span class="cert__issuer"><?= e($cert['issuer']) ?></span>
+          </span>
           <span class="cert__date"></span>
           <span class="cert__foot<?= $cert['verify'] ? ' is-verified' : '' ?>">
             <?= fh_icon($cert['verify'] ? 'verified' : 'link', 14) ?><span></span>

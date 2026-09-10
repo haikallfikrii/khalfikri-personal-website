@@ -140,24 +140,10 @@
   display: none !important;
 }
 
-/* layer 0 — real refraction. Only mounted where the browser can render it. */
+/* Refraction layer kept in the DOM for optional experiments, but never painted.
+   The channel-split displacement map produced red/green rim artefacts. */
 .lg-refract {
-  display: none;
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  -webkit-backdrop-filter: blur(0.5px);
-  backdrop-filter: blur(0.5px) url(#lg-refract);
-}
-
-html.lg-refraction .lg-refract {
-  display: block;
-}
-
-html.lg-refraction .lg--deep .lg-refract {
-  backdrop-filter: blur(0.5px) url(#lg-refract-deep);
+  display: none !important;
 }
 
 /* layer 2 — cursor-tracked specular blob (rdev's "elasticity" highlight). */

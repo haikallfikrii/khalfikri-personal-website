@@ -600,22 +600,23 @@ p {
 .hero__figure {
   position: relative;
   justify-self: center;
-  width: min(24rem, 100%);
+  width: min(18.5rem, 88%);
 }
 
 .hero__frame {
-  --lg-r: 34px;
+  --lg-r: 28px;
   position: relative;
-  padding: 0.7rem;
+  padding: 0.55rem;
   transform-style: preserve-3d;
 }
 
 .hero__photo {
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
+  max-height: 18.5rem;
   object-fit: cover;
-  object-position: 50% 12%;
-  border-radius: 27px;
+  object-position: 50% 14%;
+  border-radius: 22px;
 }
 
 .hero__ring {
@@ -644,13 +645,13 @@ p {
 }
 
 .hero__chip--tl {
-  top: 8%;
-  left: -2.4rem;
+  top: 6%;
+  left: -1.6rem;
 }
 
 .hero__chip--br {
-  bottom: 11%;
-  right: -2.2rem;
+  bottom: 8%;
+  right: -1.4rem;
 }
 
 .hero__chip > .lg-in {
@@ -876,7 +877,9 @@ p {
 .job {
   --lg-r: 22px;
   position: relative;
+  /* Extra bottom padding so chip rows clear the backdrop-filter corner clip. */
   padding: clamp(1.25rem, 2.4vw, 1.85rem);
+  padding-bottom: clamp(1.55rem, 2.8vw, 2.15rem);
   cursor: pointer;
 }
 
@@ -951,7 +954,11 @@ p {
 .job__body {
   overflow: hidden;
   height: 0;
-  transition: height 0.65s var(--spring);
+  transition: height 0.65s var(--ease-out);
+}
+
+.job__body > div {
+  padding-bottom: 0.35rem;
 }
 
 .job__bullets {
@@ -987,20 +994,20 @@ p {
 }
 
 .chip {
-  padding: 0.3rem 0.65rem;
+  padding: 0.35rem 0.7rem;
   border-radius: 8px;
   background: color-mix(in srgb, var(--ink) 7%, transparent);
   box-shadow: inset 0 0 0 1px var(--line);
   font-size: 0.755rem;
   font-weight: 500;
+  line-height: 1.35;
   color: var(--ink-soft);
-  transition: color 0.25s ease, background 0.25s ease, translate 0.4s var(--spring);
+  transition: color 0.25s ease, background 0.25s ease;
 }
 
 .chip:hover {
   color: var(--accent);
   background: color-mix(in srgb, var(--accent) 12%, transparent);
-  translate: 0 -2px;
 }
 
 /* ------------------------------------------------- pinned horizontal scroll */
@@ -1134,6 +1141,7 @@ p {
 .sgroup {
   --lg-r: 22px;
   padding: 1.5rem;
+  padding-bottom: 1.75rem;
 }
 
 .sgroup__head {
@@ -1208,38 +1216,29 @@ p {
 .cert__art {
   position: relative;
   z-index: 4;
-  aspect-ratio: 8 / 5;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
   border-radius: 19px 19px 0 0;
+  background:
+    radial-gradient(120% 90% at 18% 0%, rgba(255, 255, 255, 0.1), transparent 55%),
+    linear-gradient(160deg, rgba(255, 159, 69, 0.14), rgba(79, 209, 197, 0.08));
 }
 
 .cert__art img,
 .cert__art .cert-art {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
+  display: block;
   transition: scale 0.9s var(--ease-out);
 }
 
 .cert:hover .cert__art img,
 .cert:hover .cert__art .cert-art {
-  scale: 1.06;
+  scale: 1.03;
 }
 
-.cert__logo {
-  position: absolute;
-  left: 0.7rem;
-  bottom: 0.7rem;
-  z-index: 3;
-  width: 2.1rem;
-  height: 2.1rem;
-  object-fit: cover;
-  border-radius: 0.55rem;
-  background: #fff;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.4);
-}
-
-/* Zoom affordance appears on hover so the card is obviously clickable. */
 .cert__zoom {
   position: absolute;
   inset: 0;
@@ -1279,7 +1278,7 @@ p {
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: 1.05rem 1.1rem 1.15rem;
+  padding: 1.05rem 1.1rem 1.2rem;
 }
 
 .cert__name {
@@ -1290,8 +1289,24 @@ p {
   letter-spacing: -0.01em;
 }
 
+.cert__issuer-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.45rem;
+}
+
+.cert__logo {
+  flex: 0 0 auto;
+  width: 1.35rem;
+  height: 1.35rem;
+  object-fit: cover;
+  border-radius: 0.35rem;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+
 .cert__issuer {
-  margin-top: 0.35rem;
   font-size: 0.83rem;
   font-weight: 500;
   color: var(--accent);

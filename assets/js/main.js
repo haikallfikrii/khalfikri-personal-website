@@ -277,7 +277,8 @@
     function setOpen(open) {
       job.classList.toggle("is-open", open);
       head.setAttribute("aria-expanded", open ? "true" : "false");
-      body.style.height = open ? inner.offsetHeight + "px" : "0px";
+      // +12px buffer so chip rows clear the glass corner clip from backdrop-filter.
+      body.style.height = open ? inner.offsetHeight + 12 + "px" : "0px";
     }
 
     head.setAttribute("role", "button");
@@ -297,10 +298,10 @@
 
     // Locale changes alter bullet length, so open panels need re-measuring.
     window.addEventListener("resize", function () {
-      if (job.classList.contains("is-open")) body.style.height = inner.offsetHeight + "px";
+      if (job.classList.contains("is-open")) body.style.height = inner.offsetHeight + 12 + "px";
     });
     job._remeasure = function () {
-      if (job.classList.contains("is-open")) body.style.height = inner.offsetHeight + "px";
+      if (job.classList.contains("is-open")) body.style.height = inner.offsetHeight + 12 + "px";
     };
   });
 
@@ -526,21 +527,8 @@
 
   /* ================================================================ boot */
 
-  /* Refraction relies on backdrop-filter: url(). WebKit reports support but
-     paints nothing, so limit the enhanced path to engines that render it. */
-  function supportsRefraction() {
-    if (!window.CSS || !CSS.supports) return false;
-    if (!CSS.supports("backdrop-filter", "url(#x)") && !CSS.supports("-webkit-backdrop-filter", "url(#x)")) {
-      return false;
-    }
-    var ua = navigator.userAgent;
-    var isWebKitOnly = /AppleWebKit/.test(ua) && !/Chrome|Chromium|Edg/.test(ua);
-    return !isWebKitOnly && !/Firefox/.test(ua);
-  }
-
-  if (supportsRefraction() && !reduced) {
-    document.documentElement.classList.add("lg-refraction");
-  }
+  /* Chromatic-aberration refraction (SVG feDisplacementMap) leaves red/green
+     rim artefacts on many GPUs, so we keep the frosted glass path only. */
 
   if (window.FH_SCROLL) window.FH_SCROLL.init();
 
